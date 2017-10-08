@@ -24,10 +24,5 @@ public class Zona
     public String getNombre() {
         return nombre;
     }
-    
-    
 
-}
-    
-    
-}
+}   
