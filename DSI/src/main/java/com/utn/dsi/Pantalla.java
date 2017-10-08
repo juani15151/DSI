@@ -11,9 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.ListModel;
 
 /**
  *
@@ -27,6 +27,7 @@ public class Pantalla extends javax.swing.JFrame {
     private DefaultListModel categorias_seleccionadas_model = new DefaultListModel();
     private DefaultListModel zonas_model = new DefaultListModel();
     private DefaultListModel zonas_seleccionadas_model = new DefaultListModel();
+    private DefaultComboBoxModel metodos_model = new DefaultComboBoxModel();
     /**
      * Creates new form Pantalla
      */
@@ -38,6 +39,7 @@ public class Pantalla extends javax.swing.JFrame {
         this.categorias_incluidas_list.setModel(categorias_seleccionadas_model);
         this.zonas_no_list.setModel(zonas_model);
         this.zonas_incluidas_list.setModel(zonas_seleccionadas_model);
+        this.metodo_combo.setModel(metodos_model);
         
         g = new Gestor(this);
         g.estadisticaConsumo();
@@ -71,6 +73,7 @@ public class Pantalla extends javax.swing.JFrame {
         metodo_panel = new javax.swing.JPanel();
         metodo_combo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         zonas_panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         zonas_no_list = new javax.swing.JList<>();
@@ -245,19 +248,30 @@ public class Pantalla extends javax.swing.JFrame {
         metodo_panel.setEnabled(false);
 
         metodo_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        metodo_combo.setEnabled(false);
 
         jLabel2.setText("Método Estadístico");
+
+        jButton4.setText("Confirmar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout metodo_panelLayout = new javax.swing.GroupLayout(metodo_panel);
         metodo_panel.setLayout(metodo_panelLayout);
         metodo_panelLayout.setHorizontalGroup(
             metodo_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metodo_panelLayout.createSequentialGroup()
+            .addGroup(metodo_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(metodo_combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(metodo_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(metodo_panelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(metodo_combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metodo_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
                 .addContainerGap())
         );
         metodo_panelLayout.setVerticalGroup(
@@ -267,7 +281,9 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(metodo_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(metodo_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
 
         zonas_panel.setEnabled(false);
@@ -370,6 +386,11 @@ public class Pantalla extends javax.swing.JFrame {
         );
 
         confirmar_button.setText("Confirmar");
+        confirmar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmar_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout confirmacion_panelLayout = new javax.swing.GroupLayout(confirmacion_panel);
         confirmacion_panel.setLayout(confirmacion_panelLayout);
@@ -465,6 +486,14 @@ public class Pantalla extends javax.swing.JFrame {
         move_selected_items(this.zonas_no_list,
                 this.zonas_incluidas_list);
     }//GEN-LAST:event_add_zonas_buttonActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        tomarSeleccionMetodoEstadistico();        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void confirmar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmar_buttonActionPerformed
+        tomarConfirmacion();
+    }//GEN-LAST:event_confirmar_buttonActionPerformed
    
     private void move_selected_items(JList from, JList into){
         int[] indexes = from.getSelectedIndices();
@@ -594,12 +623,27 @@ public class Pantalla extends javax.swing.JFrame {
         this.zonas_panel.setVisible(false);        
     }
     
-    public void solicitarSeleccionMetodoEstadistico() {
-        
+    public void solicitarSeleccionMetodoEstadistico(List metodos) {
+        metodos_model.removeAllElements();
+        for(Object metodo: metodos){
+            metodos_model.addElement(metodo);
+        }
+        this.metodo_panel.setVisible(true);
+    }
+    
+    public void tomarSeleccionMetodoEstadistico(){
+        Object metodo = this.metodo_combo.getSelectedItem();
+        this.metodo_panel.setVisible(false);
+        g.tomarSeleccionMetodoEstadistico(metodo);
     }
     
     public void solicitarConfirmacion() {
-        
+        this.confirmacion_panel.setVisible(true);
+    }
+    
+    public void tomarConfirmacion() {
+        this.confirmacion_panel.setVisible(false);
+        g.tomarConfirmacion();
     }
     
     public void mostrarReporte() {
@@ -629,6 +673,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
