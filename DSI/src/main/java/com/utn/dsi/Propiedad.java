@@ -6,7 +6,10 @@
 package com.utn.dsi;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -22,12 +25,15 @@ public class Propiedad
     private List<Servicio> servicios;
     
     
-    public double buscarPromedioNormalizado(Categoria cat, Date desde, Date hasta)
+    public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {
-        double suma = 0;
-        int count = 0;
+        throw new NotImplementedException();
+        // TODO: Hacer.
+        Map<Categoria, Double> estadistica_por_categoria = new Map<>();
+
         for(Servicio s : servicios){
-            if(s.esDeCategoria(cat) && s.esPeriodoValido(desde, hasta)){
+            if(s.esDeCategoria(cats) && s.esPeriodoValido(desde, hasta)){
+                
                 suma += s.buscarPromedioNormalizado(desde, hasta);
                 count++;
             }
@@ -35,6 +41,22 @@ public class Propiedad
         // TODO: Calcular promedio normalizado.
         double promedioNormalizado = -1;
         return promedioNormalizado;
+    }
+    
+    public Map<Categoria, Double> buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){
+        Map<Categoria, Double> estadistica_por_categoria = new HashMap<>();
+        
+        Double suma;
+        for(Servicio s : servicios){
+            if(s.esDeCategoria(cats) && s.esPeriodoValido(desde, hasta)){
+                // Suma el total de consumo del servicio con el resto
+                // de la misma categoria.
+                suma = estadistica_por_categoria.getOrDefault(s.getCategoria(), 0.0);
+                suma += s.calcularSumatoria(desde, hasta);
+                estadistica_por_categoria.put(s.getCategoria(), suma);
+            }
+        }
+        return estadistica_por_categoria;
     }
     
 }

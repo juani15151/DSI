@@ -5,8 +5,12 @@
  */
 package com.utn.dsi;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -33,7 +37,7 @@ public class Zona
     }
     
     
-    public double buscarPromedioNormailizado(Categoria cat, Date desde, Date hasta)
+    public double buscarPromedioNormalizado(Categoria cat, Date desde, Date hasta)
     {
         double suma = 0;
         int count = 0;
@@ -46,5 +50,20 @@ public class Zona
         double promedioNormalizado = -1;
         return promedioNormalizado;        
     }
-
+    
+    public Map buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){
+        Double estadistica_zona = 0.0;
+        Map<Categoria, Double> estadistica_por_categorias = new HashMap<>();
+        
+        for(Propiedad p : propiedades){
+            // Suma los valores de las categorias en la propiedad al mapa de todo.
+            // Nota: Podria ser mas eficiente si pasamos el mapa hacia abajo y
+            // que las otras clases vayan sumando en lugar de hacer el merge.
+            for(Entry<Categoria, Double> e : p.buscarSumatoria(cats, desde, hasta).entrySet()){    
+                estadistica_por_categorias.merge(e.getKey(), e.getValue(), Double::sum);
+            }
+            
+        }
+        return estadistica_por_categorias;        
+    }
 }

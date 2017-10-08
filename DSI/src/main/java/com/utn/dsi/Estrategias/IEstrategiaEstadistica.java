@@ -11,6 +11,7 @@ import com.utn.dsi.Zona;
 import com.utn.dsi.Zona;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,5 +19,6 @@ import java.util.List;
  */
 public interface IEstrategiaEstadistica 
 {
-    int calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta);
+    // La lista debe contener 2 mapas, uno con zonas y otro con categorias.
+    List calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta);
 }
