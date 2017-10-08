@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.ListModel;
 
 /**
@@ -78,6 +79,9 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        confimar_zonas_button = new javax.swing.JButton();
+        rm_zonas_button = new javax.swing.JButton();
+        add_zonas_button = new javax.swing.JButton();
         confirmacion_panel = new javax.swing.JPanel();
         confirmar_button = new javax.swing.JButton();
 
@@ -295,23 +299,49 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("No incluidas");
 
+        confimar_zonas_button.setText("Confirmar");
+        confimar_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confimar_zonas_buttonActionPerformed(evt);
+            }
+        });
+
+        rm_zonas_button.setText("Eliminar");
+        rm_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rm_zonas_buttonActionPerformed(evt);
+            }
+        });
+
+        add_zonas_button.setText("Agregar");
+        add_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_zonas_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout zonas_panelLayout = new javax.swing.GroupLayout(zonas_panel);
         zonas_panel.setLayout(zonas_panelLayout);
         zonas_panelLayout.setHorizontalGroup(
             zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, zonas_panelLayout.createSequentialGroup()
+            .addGroup(zonas_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, zonas_panelLayout.createSequentialGroup()
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(confimar_zonas_button, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(zonas_panelLayout.createSequentialGroup()
                         .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(add_zonas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rm_zonas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(zonas_panelLayout.createSequentialGroup()
+                                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         zonas_panelLayout.setVerticalGroup(
@@ -326,11 +356,17 @@ public class Pantalla extends javax.swing.JFrame {
                         .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_zonas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rm_zonas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(confimar_zonas_button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         confirmar_button.setText("Confirmar");
@@ -407,38 +443,47 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int[] indexes = this.categorias_no_list.getSelectedIndices();
-        if (indexes.length == 0){
-            // TODO: Informar error, debe seleccionar al menos 1 categoria.
-            return;
-        }
-        Object[] elementos = new Object[indexes.length + 1];
-        for (int i : indexes){
-            elementos[i] = this.categorias_model.get(i);            
-        }
-        for (Object o : elementos){
-            this.categorias_seleccionadas_model.addElement(o);
-            this.categorias_model.removeElement(o);
-        }
+        move_selected_items(this.categorias_no_list,
+                this.categorias_incluidas_list);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int[] indexes = this.categorias_incluidas_list.getSelectedIndices();
+        move_selected_items(this.categorias_incluidas_list, 
+                this.categorias_no_list);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void confimar_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confimar_zonas_buttonActionPerformed
+        tomarSeleccionZonas();
+    }//GEN-LAST:event_confimar_zonas_buttonActionPerformed
+
+    private void rm_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rm_zonas_buttonActionPerformed
+        move_selected_items(this.zonas_incluidas_list,
+                this.zonas_no_list);
+    }//GEN-LAST:event_rm_zonas_buttonActionPerformed
+
+    private void add_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_zonas_buttonActionPerformed
+        move_selected_items(this.zonas_no_list,
+                this.zonas_incluidas_list);
+    }//GEN-LAST:event_add_zonas_buttonActionPerformed
+   
+    private void move_selected_items(JList from, JList into){
+        int[] indexes = from.getSelectedIndices();
         if (indexes.length == 0){
             // TODO: Informar error, debe seleccionar al menos 1 categoria.
             return;
         }
         Object[] elementos = new Object[indexes.length + 1];
+        DefaultListModel from_model = (DefaultListModel) from.getModel();
+        DefaultListModel into_model = (DefaultListModel) into.getModel();
         for (int i : indexes){
-            elementos[i] = this.categorias_seleccionadas_model.get(i);            
+            elementos[i] = from_model.get(i);            
         }
         for (Object o : elementos){
-            this.categorias_model.addElement(o);
-            this.categorias_seleccionadas_model.removeElement(o);
+            
+            into_model.addElement(o);
+            from_model.removeElement(o);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
-   
-
+    }
     
     /**
      * @param args the command line arguments
@@ -531,12 +576,22 @@ public class Pantalla extends javax.swing.JFrame {
         
     }
     
-    public void solicitarSeleccionZonas() {
+    public void solicitarSeleccionZonas(List zonas) {
+        zonas_model.removeAllElements();
+        zonas_seleccionadas_model.removeAllElements();
         
+        for(Object zona : zonas){
+            zonas_model.addElement(zona);            
+        }
+        
+        this.zonas_panel.setVisible(true);
     }
     
     public void tomarSeleccionZonas() {
-        
+        Object[] categorias = new Object[zonas_seleccionadas_model.getSize()];
+        zonas_seleccionadas_model.copyInto(categorias);        
+        g.tomarSeleccionZonas(categorias);
+        this.zonas_panel.setVisible(false);        
     }
     
     public void solicitarSeleccionMetodoEstadistico() {
@@ -561,9 +616,11 @@ public class Pantalla extends javax.swing.JFrame {
             
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add_zonas_button;
     private javax.swing.JList<String> categorias_incluidas_list;
     private javax.swing.JList<String> categorias_no_list;
     private javax.swing.JPanel categorias_panel;
+    private javax.swing.JButton confimar_zonas_button;
     private javax.swing.JPanel confirmacion_panel;
     private javax.swing.JButton confirmar_button;
     private javax.swing.JFormattedTextField fecha_desde_field;
@@ -586,6 +643,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> metodo_combo;
     private javax.swing.JPanel metodo_panel;
+    private javax.swing.JButton rm_zonas_button;
     private javax.swing.JLabel titulo;
     private javax.swing.JList<String> zonas_incluidas_list;
     private javax.swing.JList<String> zonas_no_list;
