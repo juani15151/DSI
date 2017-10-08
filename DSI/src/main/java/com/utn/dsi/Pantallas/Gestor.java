@@ -126,7 +126,7 @@ public class Gestor
     
     public void tomarConfirmacion()
     {
-        generarReporte(calcularEstadistica());
+        //generarReporte(calcularEstadistica());
         pantalla.solicitarDecisionImpresion();
     }
     
@@ -142,8 +142,9 @@ public class Gestor
         pantalla.mostrarReporte();
     }
     
-    public void tomarDecisionImpresion()
+    public void tomarDecisionImpresion(boolean print)
     {
+        
     }
     
 }

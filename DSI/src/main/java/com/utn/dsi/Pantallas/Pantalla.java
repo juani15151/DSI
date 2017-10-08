@@ -5,6 +5,7 @@
  */
 package com.utn.dsi.Pantallas;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -23,25 +27,28 @@ import javax.swing.JOptionPane;
 public class Pantalla extends javax.swing.JFrame {
 
     private Gestor g;
-    private Point start_panel_location;
     private DefaultListModel categorias_model = new DefaultListModel();
     private DefaultListModel categorias_seleccionadas_model = new DefaultListModel();
     private DefaultListModel zonas_model = new DefaultListModel();
     private DefaultListModel zonas_seleccionadas_model = new DefaultListModel();
     private DefaultComboBoxModel metodos_model = new DefaultComboBoxModel();
+
     /**
      * Creates new form Pantalla
      */
     public Pantalla() { // Nota: Seria opcionEstadisticaConsumo();
         initComponents();
-        this.start_panel_location = this.fecha_panel.getLocation();
-        this.habilitarVentana();       
+        this.titulo.setLocation(12, 12);
+        this.setSize(this.titulo.getSize().width + 24, this.titulo.getSize().height + this.fecha_panel.getSize().height);
         this.categorias_no_list.setModel(categorias_model);
         this.categorias_incluidas_list.setModel(categorias_seleccionadas_model);
         this.zonas_no_list.setModel(zonas_model);
         this.zonas_incluidas_list.setModel(zonas_seleccionadas_model);
         this.metodo_combo.setModel(metodos_model);
-        
+        this.fecha_desde_field.setInputVerifier(new DateVerifier());
+        this.fecha_hasta_field.setInputVerifier(new DateVerifier());
+
+        this.habilitarVentana();
         g = new Gestor(this);
         g.estadisticaConsumo();
     }
@@ -56,10 +63,22 @@ public class Pantalla extends javax.swing.JFrame {
     private void initComponents() {
 
         titulo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         fecha_panel = new javax.swing.JPanel();
         fecha_desde_field = new javax.swing.JFormattedTextField();
         fecha_hasta_field = new javax.swing.JFormattedTextField();
         btnConfirmarPeriodo = new javax.swing.JButton();
+        zonas_panel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        zonas_no_list = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        zonas_incluidas_list = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnConfirmarZonas = new javax.swing.JButton();
+        btnEliminarZonas = new javax.swing.JButton();
+        btnAddZonas = new javax.swing.JButton();
         categorias_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         categorias_no_list = new javax.swing.JList<>();
@@ -75,17 +94,6 @@ public class Pantalla extends javax.swing.JFrame {
         metodo_combo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnConfirmarMetodo = new javax.swing.JButton();
-        zonas_panel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        zonas_no_list = new javax.swing.JList<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        zonas_incluidas_list = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        btnConfirmarZonas = new javax.swing.JButton();
-        btnEliminarZonas = new javax.swing.JButton();
-        btnAddZonas = new javax.swing.JButton();
         confirmacion_panel = new javax.swing.JPanel();
         confirmar_button = new javax.swing.JButton();
 
@@ -94,17 +102,32 @@ public class Pantalla extends javax.swing.JFrame {
         setEnabled(false);
         setMinimumSize(new java.awt.Dimension(20, 450));
         setName("pantalla_form"); // NOI18N
-        setResizable(false);
 
         titulo.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Estadística de Consumos");
+        titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        titulo.setMaximumSize(new java.awt.Dimension(440, 43));
+        titulo.setMinimumSize(new java.awt.Dimension(440, 43));
+        titulo.setName(""); // NOI18N
+        titulo.setPreferredSize(new java.awt.Dimension(440, 43));
+        titulo.setRequestFocusEnabled(false);
 
-        fecha_panel.setEnabled(false);
+        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
 
-        fecha_desde_field.setText("Desde");
+        fecha_desde_field.setText("Desde (dd/mm/aaaa)");
+        fecha_desde_field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fecha_desde_fieldFocusGained(evt);
+            }
+        });
 
-        fecha_hasta_field.setText("Hasta");
+        fecha_hasta_field.setText("Hasta (dd/mm/aaaa)");
+        fecha_hasta_field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fecha_hasta_fieldFocusGained(evt);
+            }
+        });
         fecha_hasta_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fecha_hasta_fieldActionPerformed(evt);
@@ -127,7 +150,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(fecha_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fecha_panelLayout.createSequentialGroup()
                         .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnConfirmarPeriodo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -144,7 +167,106 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        categorias_panel.setEnabled(false);
+        jPanel1.add(fecha_panel);
+
+        zonas_no_list.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        zonas_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        zonas_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
+        jScrollPane3.setViewportView(zonas_no_list);
+
+        zonas_incluidas_list.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        zonas_incluidas_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jScrollPane4.setViewportView(zonas_incluidas_list);
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Zonas");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Incluidas");
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("No incluidas");
+
+        btnConfirmarZonas.setText("Confirmar");
+        btnConfirmarZonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarZonasActionPerformed(evt);
+            }
+        });
+
+        btnEliminarZonas.setText("Eliminar");
+        btnEliminarZonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarZonasActionPerformed(evt);
+            }
+        });
+
+        btnAddZonas.setText("Agregar");
+        btnAddZonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddZonasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout zonas_panelLayout = new javax.swing.GroupLayout(zonas_panel);
+        zonas_panel.setLayout(zonas_panelLayout);
+        zonas_panelLayout.setHorizontalGroup(
+            zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(zonas_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnConfirmarZonas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(zonas_panelLayout.createSequentialGroup()
+                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnAddZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEliminarZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(zonas_panelLayout.createSequentialGroup()
+                                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        zonas_panelLayout.setVerticalGroup(
+            zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(zonas_panelLayout.createSequentialGroup()
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(zonas_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5))
+                    .addGroup(zonas_panelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6))))
+                .addGap(0, 0, 0)
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnConfirmarZonas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(zonas_panel);
 
         categorias_no_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -245,7 +367,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        metodo_panel.setEnabled(false);
+        jPanel1.add(categorias_panel);
 
         metodo_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -268,7 +390,7 @@ public class Pantalla extends javax.swing.JFrame {
                     .addGroup(metodo_panelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metodo_combo, 0, 324, Short.MAX_VALUE))
+                        .addComponent(metodo_combo, 0, 251, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metodo_panelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnConfirmarMetodo)))
@@ -286,104 +408,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        zonas_panel.setEnabled(false);
-
-        zonas_no_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        zonas_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        zonas_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
-        jScrollPane3.setViewportView(zonas_no_list);
-
-        zonas_incluidas_list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        zonas_incluidas_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jScrollPane4.setViewportView(zonas_incluidas_list);
-
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Zonas");
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Incluidas");
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("No incluidas");
-
-        btnConfirmarZonas.setText("Confirmar");
-        btnConfirmarZonas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarZonasActionPerformed(evt);
-            }
-        });
-
-        btnEliminarZonas.setText("Eliminar");
-        btnEliminarZonas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarZonasActionPerformed(evt);
-            }
-        });
-
-        btnAddZonas.setText("Agregar");
-        btnAddZonas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddZonasActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout zonas_panelLayout = new javax.swing.GroupLayout(zonas_panel);
-        zonas_panel.setLayout(zonas_panelLayout);
-        zonas_panelLayout.setHorizontalGroup(
-            zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(zonas_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnConfirmarZonas, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(zonas_panelLayout.createSequentialGroup()
-                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(btnAddZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminarZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(zonas_panelLayout.createSequentialGroup()
-                                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane4)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        zonas_panelLayout.setVerticalGroup(
-            zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(zonas_panelLayout.createSequentialGroup()
-                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(zonas_panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(zonas_panelLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))))
-                .addGap(0, 0, 0)
-                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConfirmarZonas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(metodo_panel);
 
         confirmar_button.setText("Confirmar");
         confirmar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -409,45 +434,30 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(confirmacion_panel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fecha_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(categorias_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(zonas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172))))
+                        .addContainerGap()
+                        .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(titulo)
-                        .addGap(18, 18, 18)
-                        .addComponent(fecha_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(categorias_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(zonas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap()
+                .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleName("Estadistica de Consumos");
@@ -474,7 +484,7 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        move_selected_items(this.categorias_incluidas_list, 
+        move_selected_items(this.categorias_incluidas_list,
                 this.categorias_no_list);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -493,32 +503,40 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddZonasActionPerformed
 
     private void btnConfirmarMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarMetodoActionPerformed
-        tomarSeleccionMetodoEstadistico();        
+        tomarSeleccionMetodoEstadistico();
     }//GEN-LAST:event_btnConfirmarMetodoActionPerformed
 
     private void confirmar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmar_buttonActionPerformed
         tomarConfirmacion();
     }//GEN-LAST:event_confirmar_buttonActionPerformed
-   
-    private void move_selected_items(JList from, JList into){
+
+    private void fecha_desde_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fecha_desde_fieldFocusGained
+        this.fecha_desde_field.selectAll();
+    }//GEN-LAST:event_fecha_desde_fieldFocusGained
+
+    private void fecha_hasta_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fecha_hasta_fieldFocusGained
+        this.fecha_hasta_field.selectAll();
+    }//GEN-LAST:event_fecha_hasta_fieldFocusGained
+
+    private void move_selected_items(JList from, JList into) {
         int[] indexes = from.getSelectedIndices();
-        if (indexes.length == 0){
+        if (indexes.length == 0) {
             // TODO: Informar error, debe seleccionar al menos 1 categoria.
             return;
         }
         Object[] elementos = new Object[indexes.length + 1];
         DefaultListModel from_model = (DefaultListModel) from.getModel();
         DefaultListModel into_model = (DefaultListModel) into.getModel();
-        for (int i : indexes){
-            elementos[i] = from_model.get(i);            
+        for (int i = 0; i < indexes.length; i++) {
+            elementos[i] = from_model.get(indexes[i]);
         }
-        for (Object o : elementos){
-            
+        for (Object o : elementos) {
+
             into_model.addElement(o);
             from_model.removeElement(o);
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -548,121 +566,135 @@ public class Pantalla extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {   
+            public void run() {
                 new Pantalla();
             }
         });
     }
-    
+
     public void opcionEstadisticaConsumos() {
-        
+
     }
-    
+
     private void habilitarVentana() {
         this.setEnabled(true);
-        categorias_panel.setVisible(false);
-        categorias_panel.setLocation(start_panel_location);
+        categorias_panel.setVisible(false);        
         zonas_panel.setVisible(false);
-        zonas_panel.setLocation(start_panel_location);
         metodo_panel.setVisible(false);
-        metodo_panel.setLocation(start_panel_location);
         confirmacion_panel.setVisible(false);
-        confirmacion_panel.setLocation(start_panel_location);        
         this.setVisible(true);
     }
-    
+
     public void solicitarPeriodo() {
-        this.fecha_panel.setVisible(true); 
+        this.fecha_panel.setVisible(true);
     }
-    
-    public void tomarPeriodo() {        
+
+    public void tomarPeriodo() {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date desde, hasta;
         try {
             desde = df.parse(fecha_desde_field.getText());
             hasta = df.parse(fecha_hasta_field.getText());
-        } 
-        catch (ParseException pe){
+        } catch (ParseException pe) {
             JOptionPane.showMessageDialog(null, "Error, fechas mal ingresadas.");
             return;
         }
-        
+
         this.fecha_panel.setVisible(false);
+        // TODO: Si el gestor indica que el periodo es invalido que se hace?
         g.tomarPeriodo(desde, hasta);
     }
-    
+
     public void solicitarSeleccionCategorias(List categorias) {
         categorias_model.removeAllElements();
         categorias_seleccionadas_model.removeAllElements();
-        
-        for(Object categoria : categorias){
-            categorias_model.addElement(categoria);            
+
+        for (Object categoria : categorias) {
+            categorias_model.addElement(categoria);
         }
         
         this.categorias_panel.setVisible(true);
     }
-    
-    public void tomarSeleccionCategorias() {       
+
+    public void tomarSeleccionCategorias() {
         Object[] categorias = new Object[categorias_seleccionadas_model.getSize()];
-        categorias_seleccionadas_model.copyInto(categorias);        
-        g.tomarSeleccionCategorias(categorias);
+        categorias_seleccionadas_model.copyInto(categorias);
         this.categorias_panel.setVisible(false);
-        
+        g.tomarSeleccionCategorias(categorias);       
     }
-    
+
     public void solicitarSeleccionZonas(List zonas) {
         zonas_model.removeAllElements();
         zonas_seleccionadas_model.removeAllElements();
-        
-        for(Object zona : zonas){
-            zonas_model.addElement(zona);            
-        }
-        
+
+        for (Object zona : zonas) {
+            zonas_model.addElement(zona);
+        }      
+
         this.zonas_panel.setVisible(true);
     }
-    
+
     public void tomarSeleccionZonas() {
         Object[] categorias = new Object[zonas_seleccionadas_model.getSize()];
-        zonas_seleccionadas_model.copyInto(categorias);        
-        g.tomarSeleccionZonas(categorias);
-        this.zonas_panel.setVisible(false);        
+        zonas_seleccionadas_model.copyInto(categorias);
+        this.zonas_panel.setVisible(false);
+        g.tomarSeleccionZonas(categorias);        
     }
-    
+
     public void solicitarSeleccionMetodoEstadistico(List metodos) {
         metodos_model.removeAllElements();
-        for(Object metodo: metodos){
+        for (Object metodo : metodos) {
             metodos_model.addElement(metodo);
         }
         this.metodo_panel.setVisible(true);
     }
-    
-    public void tomarSeleccionMetodoEstadistico(){
+
+    public void tomarSeleccionMetodoEstadistico() {
         Object metodo = this.metodo_combo.getSelectedItem();
         this.metodo_panel.setVisible(false);
         g.tomarSeleccionMetodoEstadistico(metodo);
     }
-    
+
     public void solicitarConfirmacion() {
         this.confirmacion_panel.setVisible(true);
     }
-    
+
     public void tomarConfirmacion() {
         this.confirmacion_panel.setVisible(false);
         g.tomarConfirmacion();
     }
-    
+
     public void mostrarReporte() {
-        
+
     }
-    
+
     public void solicitarDecisionImpresion() {
-        
+        int ans = JOptionPane.showConfirmDialog(this, "¿Desea Imprimir el Informe?", 
+                "Impresión", JOptionPane.YES_NO_OPTION);
+        tomarDecisionImpresion(ans == 0);        
     }
-    
-    public void tomarDecicisionImpresion() {
-        
+
+    public void tomarDecisionImpresion(boolean print) {
+        g.tomarDecisionImpresion(print);
     }
-            
+
+    private class DateVerifier extends InputVerifier {
+
+        @Override
+        public boolean verify(JComponent input) {
+            JFormattedTextField tf = (JFormattedTextField) input;
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date cast = df.parse(tf.getText());
+            } catch (ParseException pe) {
+                tf.setBackground(Color.red);
+                return false;
+            }
+            tf.setBackground(Color.white);
+            return true;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddZonas;
@@ -688,6 +720,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
