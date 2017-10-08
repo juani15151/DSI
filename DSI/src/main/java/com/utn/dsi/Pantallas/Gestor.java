@@ -41,12 +41,13 @@ public class Gestor
     
     public void tomarPeriodo(Date desde, Date hasta)
     {
-        System.out.println(desde.toString() + " - " + hasta.toString());
+        fechaActual = obtenerFechaActual();
+        //System.out.println(desde.toString() + " - " + hasta.toString());
         if (validarPeriodo(desde, hasta)){
             this.desde = desde;
             this.hasta = hasta; 
             
-            fechaActual = obtenerFechaActual();
+            
             categorias = buscarCategorias();
             
             pantalla.solicitarSeleccionCategorias(categorias);
@@ -64,7 +65,7 @@ public class Gestor
     
     public boolean validarPeriodo(Date desde, Date hasta)
     {
-        return !desde.after(hasta) && !desde.after(fechaActual);
+        return desde.before(hasta) && desde.before(fechaActual);
     }
     
     public List<Categoria> buscarCategorias()
