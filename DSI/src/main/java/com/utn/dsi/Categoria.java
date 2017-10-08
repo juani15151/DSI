@@ -16,7 +16,7 @@ public class Categoria
     private Float montoBasico;
     private String nombre;
     
-    Categoria(String nombre){
+    public Categoria(String nombre){
         this.nombre = nombre;
     }
     

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.utn.dsi;
+package com.utn.dsi.Pantallas;
 
+import com.utn.dsi.Categoria;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import java.util.Vector;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Gestor
     
     // VER TIPO DE DATOS DE RETORNO DE CADA METODO
     
-    Gestor(Pantalla p){
+    public Gestor(Pantalla p){
         pantalla = p;
     }
     

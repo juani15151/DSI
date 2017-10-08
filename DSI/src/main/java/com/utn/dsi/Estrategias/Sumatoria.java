@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.utn.dsi;
+package com.utn.dsi.Estrategias;
 
+import com.utn.dsi.Categoria;
+import com.utn.dsi.Categoria;
+import com.utn.dsi.Zona;
+import com.utn.dsi.Zona;
 import java.util.Date;
 import java.util.List;
 
