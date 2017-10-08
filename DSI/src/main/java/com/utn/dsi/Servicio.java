@@ -17,15 +17,18 @@ public class Servicio
     private Date fechaAlta;
     private Date fechaDeSolicitud;
     private List<Factura> facturas;
+    private Categoria categoria;
     
     // ver tipo de dato de retorno en cada metodo
     
-    public void esDeCategoria()
+    public boolean esDeCategoria(Categoria cat)            
     {
+        return this.categoria.equals(cat);
     }
     
-    public void esPeriodoValido()
+    public boolean esPeriodoValido(Date desde, Date hasta)
     {
+        return true;
     }
     
     public double buscarPromedioNormalizado(Date desde, Date hasta)

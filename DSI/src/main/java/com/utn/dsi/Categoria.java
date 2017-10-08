@@ -9,7 +9,7 @@ package com.utn.dsi;
  *
  * @author Gaston
  */
-public class Categoria 
+public class Categoria
 {
     private Float m3BasicosDesde;
     private Float M3BasicosHasta;
@@ -27,5 +27,9 @@ public class Categoria
     public String toString(){
         return nombre;
     }    
+    
+    public boolean equals(Categoria c){
+        return this.nombre == c.getNombre();
+    }
     
 }
