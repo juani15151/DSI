@@ -63,7 +63,8 @@ public class Gestor
     
     public boolean validarPeriodo(Date desde, Date hasta)
     {
-        if(desde.after(hasta)){
+        return !desde.after(hasta) && !desde.after(fechaActual);
+        /*if(desde.after(hasta)){
             // Fecha desde es mayor a fecha hasta
             return false;                    
         } 
@@ -71,7 +72,7 @@ public class Gestor
             // El periodo es en el futuro, no existen lecturas.
             return false;
         }
-        return true;
+        return true;*/
     }
     
     public List<Categoria> buscarCategorias()
