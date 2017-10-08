@@ -21,6 +21,9 @@ public class Gestor
     private String seleccionZonas;
     private float promedioNormalizado;
     
+    
+    // VER TIPO DE DATOS DE RETORNO DE CADA METODO
+    
     public void estadisticaConsumo()
     {
     }
@@ -29,5 +32,48 @@ public class Gestor
     {
     }
     
-    public 
+    public void obtenerFechaActual()
+    {
+    }
+    
+    public void validarPeriodo()
+    {
+    }
+    
+    public void buscarCategorias()
+    {
+    }
+    
+    public void tomarSeleccionCategorias()
+    {
+    }
+    
+    public void buscarZonas()
+    {
+    }
+    
+    public void tomarSeleccionZona()
+    {
+    }
+    
+    public void tomarSeleccionMetodoEstadistico()
+    {
+    }
+    
+    public void tomarConfirmacion()
+    {
+    }
+    
+    public void calcularPromedioNormalizado()
+    {
+    }
+    
+    public void generarReporte()
+    {
+    }
+    
+    public void tomarDecisionImpresion()
+    {
+    }
+    
 }
