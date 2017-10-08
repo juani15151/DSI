@@ -9,6 +9,12 @@ package com.utn.dsi;
  *
  * @author juani
  */
-public class DetalleConceptoFacturado {
+public class DetalleConceptoFacturado 
+{
+    private float subtotal;
+    
+    public void getSubTotal()
+    {
+    }
     
 }

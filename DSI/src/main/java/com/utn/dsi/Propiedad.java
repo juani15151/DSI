@@ -9,6 +9,18 @@ package com.utn.dsi;
  *
  * @author juani
  */
-public class Propiedad {
+public class Propiedad 
+{
+    private String calle;
+    private String departamento;
+    private int nroIdentificacionCatastral;
+    private int numero;
+    private int piso;
+    
+    
+    //ver tipo de dato de retorno
+    public void buscarPromedioNormalizado()
+    {
+    }
     
 }

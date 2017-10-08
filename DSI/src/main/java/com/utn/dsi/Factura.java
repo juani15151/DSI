@@ -5,10 +5,31 @@
  */
 package com.utn.dsi;
 
+import java.util.Date;
+
 /**
  *
  * @author juani
  */
-public class Factura {
-    
+public class Factura 
+{
+    private float estimada;
+    private Date fechaHoraLectura;
+    private float valorCorregido;
+    private float valorLectura;
+
+
+    // ver tipo de dato de retorno de cada metodo
+    public void esDePeriodo()
+    {
+    }
+
+    public void calcularPromedioNormalizado()
+    {
+    }
+
+    public void calcularTotal()
+    {
+    }
+ 
 }
