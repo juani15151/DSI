@@ -5,17 +5,23 @@
  */
 package com.utn.dsi;
 
+import java.awt.Point;
+
 /**
  *
  * @author juani
  */
 public class Pantalla extends javax.swing.JFrame {
 
+    private Gestor g = new Gestor();
+    private Point start_panel_location;
     /**
      * Creates new form Pantalla
      */
-    public Pantalla() {
+    public Pantalla() { // Nota: Seria opcionEstadisticaConsumo();
         initComponents();
+        this.habilitarVentana();
+        start_panel_location = this.fecha_panel.getLocation();
     }
 
     /**
@@ -27,11 +33,11 @@ public class Pantalla extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        confirmar_button = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         fecha_panel = new javax.swing.JPanel();
         fecha_desde_field = new javax.swing.JFormattedTextField();
         fecha_hasta_field = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
         categorias_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         categorias_no_list = new javax.swing.JList<>();
@@ -51,15 +57,14 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        confirmacion_panel = new javax.swing.JPanel();
+        confirmar_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estadística de Consumos");
         setEnabled(false);
         setName("pantalla_form"); // NOI18N
         setResizable(false);
-
-        confirmar_button.setText("Confirmar");
-        confirmar_button.setEnabled(false);
 
         titulo.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -68,13 +73,18 @@ public class Pantalla extends javax.swing.JFrame {
         fecha_panel.setEnabled(false);
 
         fecha_desde_field.setText("Desde");
-        fecha_desde_field.setEnabled(false);
 
         fecha_hasta_field.setText("Hasta");
-        fecha_hasta_field.setEnabled(false);
         fecha_hasta_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fecha_hasta_fieldActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Confirmar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -84,9 +94,12 @@ public class Pantalla extends javax.swing.JFrame {
             fecha_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fecha_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(fecha_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fecha_panelLayout.createSequentialGroup()
+                        .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         fecha_panelLayout.setVerticalGroup(
@@ -96,7 +109,9 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(fecha_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         categorias_panel.setEnabled(false);
@@ -261,23 +276,42 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        confirmar_button.setText("Confirmar");
+
+        javax.swing.GroupLayout confirmacion_panelLayout = new javax.swing.GroupLayout(confirmacion_panel);
+        confirmacion_panel.setLayout(confirmacion_panelLayout);
+        confirmacion_panelLayout.setHorizontalGroup(
+            confirmacion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confirmacion_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(confirmar_button)
+                .addContainerGap())
+        );
+        confirmacion_panelLayout.setVerticalGroup(
+            confirmacion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confirmacion_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(confirmar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(confirmar_button)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fecha_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(metodo_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(categorias_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(zonas_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fecha_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(metodo_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(categorias_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(zonas_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +327,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(confirmar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,6 +340,10 @@ public class Pantalla extends javax.swing.JFrame {
     private void fecha_hasta_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha_hasta_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fecha_hasta_fieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        tomarPeriodo();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,8 +374,8 @@ public class Pantalla extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {                
-                new Pantalla().setVisible(true);
+            public void run() {   
+                new Pantalla();
             }
         });
     }
@@ -346,22 +384,27 @@ public class Pantalla extends javax.swing.JFrame {
         
     }
     
-    public void habilitarVentana() {
+    private void habilitarVentana() {
         this.setEnabled(true);
+        categorias_panel.setVisible(false);
+        zonas_panel.setVisible(false);
+        metodo_panel.setVisible(false);
+        confirmacion_panel.setVisible(false);
+        this.setVisible(true);
     }
     
     public void solicitarPeriodo() {
-        this.fecha_panel.setEnabled(true);
-        //this.fecha_desde_field.setEnabled(true);
-        //this.fecha_hasta_field.setEnabled(true);
+        this.fecha_panel.setVisible(true); 
     }
     
     public void tomarPeriodo() {
-        
+        this.fecha_panel.setVisible(false);
+        solicitarSeleccionCategorias(); // TODO: Borrar
     }
     
     public void solicitarSeleccionCategorias() {
-        
+        categorias_panel.setLocation(fecha_panel.getLocation());
+        this.categorias_panel.setVisible(true);
     }
     
     public void tomarSeleccionCategorias() {
@@ -401,10 +444,12 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JList<String> categorias_incluidas_list;
     private javax.swing.JList<String> categorias_no_list;
     private javax.swing.JPanel categorias_panel;
+    private javax.swing.JPanel confirmacion_panel;
     private javax.swing.JButton confirmar_button;
     private javax.swing.JFormattedTextField fecha_desde_field;
     private javax.swing.JFormattedTextField fecha_hasta_field;
     private javax.swing.JPanel fecha_panel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
