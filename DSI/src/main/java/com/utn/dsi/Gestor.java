@@ -5,10 +5,29 @@
  */
 package com.utn.dsi;
 
+import java.util.Date;
+
 /**
  *
  * @author Gaston
  */
-public class Gestor {
+public class Gestor 
+{
+    private Date periodo;
+    private Date fechaActual;
+    private String categorias;
+    private String seleccionCategorias;
+    private String zonas;
+    private String seleccionZonas;
+    private float promedioNormalizado;
     
+    public void estadisticaConsumo()
+    {
+    }
+    
+    public void tomarPedido()
+    {
+    }
+    
+    public 
 }
