@@ -11,10 +11,28 @@ package com.utn.dsi;
  */
 public class DetalleConceptoFacturado 
 {
-    private float subtotal;
-    
-    public void getSubTotal()
-    {
+    private String concepto;
+    private double subtotal;
+
+    public DetalleConceptoFacturado(String concepto, double subtotal) {
+        this.concepto = concepto;
+        this.subtotal = subtotal;
     }
+            
+    public double getSubTotal()
+    {
+        return subtotal;
+    }
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    @Override
+    public String toString() {
+        return "-- " + concepto + " ( $" + subtotal + ')';
+    }
+    
+    
     
 }
