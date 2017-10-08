@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
@@ -21,13 +22,22 @@ public class Pantalla extends javax.swing.JFrame {
 
     private Gestor g;
     private Point start_panel_location;
+    private DefaultListModel categorias_model = new DefaultListModel();
+    private DefaultListModel categorias_seleccionadas_model = new DefaultListModel();
+    private DefaultListModel zonas_model = new DefaultListModel();
+    private DefaultListModel zonas_seleccionadas_model = new DefaultListModel();
     /**
      * Creates new form Pantalla
      */
     public Pantalla() { // Nota: Seria opcionEstadisticaConsumo();
         initComponents();
-        this.habilitarVentana();
-        start_panel_location = this.fecha_panel.getLocation();
+        this.start_panel_location = this.fecha_panel.getLocation();
+        this.habilitarVentana();       
+        this.categorias_no_list.setModel(categorias_model);
+        this.categorias_incluidas_list.setModel(categorias_seleccionadas_model);
+        this.zonas_no_list.setModel(zonas_model);
+        this.zonas_incluidas_list.setModel(zonas_seleccionadas_model);
+        
         g = new Gestor(this);
         g.estadisticaConsumo();
     }
@@ -55,6 +65,8 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         metodo_panel = new javax.swing.JPanel();
         metodo_combo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -72,6 +84,7 @@ public class Pantalla extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estadística de Consumos");
         setEnabled(false);
+        setMinimumSize(new java.awt.Dimension(20, 450));
         setName("pantalla_form"); // NOI18N
         setResizable(false);
 
@@ -131,6 +144,7 @@ public class Pantalla extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         categorias_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        categorias_no_list.setMaximumSize(new java.awt.Dimension(61, 200));
         categorias_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
         jScrollPane1.setViewportView(categorias_no_list);
 
@@ -140,6 +154,7 @@ public class Pantalla extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         categorias_incluidas_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        categorias_incluidas_list.setMaximumSize(new java.awt.Dimension(61, 200));
         jScrollPane2.setViewportView(categorias_incluidas_list);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -159,27 +174,44 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout categorias_panelLayout = new javax.swing.GroupLayout(categorias_panel);
         categorias_panel.setLayout(categorias_panelLayout);
         categorias_panelLayout.setHorizontalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categorias_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(categorias_panelLayout.createSequentialGroup()
-                        .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categorias_panelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addContainerGap())
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, categorias_panelLayout.createSequentialGroup()
+                        .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addGroup(categorias_panelLayout.createSequentialGroup()
+                                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         categorias_panelLayout.setVerticalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,8 +230,12 @@ public class Pantalla extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         metodo_panel.setEnabled(false);
@@ -370,6 +406,40 @@ public class Pantalla extends javax.swing.JFrame {
         tomarSeleccionCategorias();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int[] indexes = this.categorias_no_list.getSelectedIndices();
+        if (indexes.length == 0){
+            // TODO: Informar error, debe seleccionar al menos 1 categoria.
+            return;
+        }
+        Object[] elementos = new Object[indexes.length + 1];
+        for (int i : indexes){
+            elementos[i] = this.categorias_model.get(i);            
+        }
+        for (Object o : elementos){
+            this.categorias_seleccionadas_model.addElement(o);
+            this.categorias_model.removeElement(o);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int[] indexes = this.categorias_incluidas_list.getSelectedIndices();
+        if (indexes.length == 0){
+            // TODO: Informar error, debe seleccionar al menos 1 categoria.
+            return;
+        }
+        Object[] elementos = new Object[indexes.length + 1];
+        for (int i : indexes){
+            elementos[i] = this.categorias_seleccionadas_model.get(i);            
+        }
+        for (Object o : elementos){
+            this.categorias_model.addElement(o);
+            this.categorias_seleccionadas_model.removeElement(o);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+   
+
+    
     /**
      * @param args the command line arguments
      */
@@ -442,25 +512,20 @@ public class Pantalla extends javax.swing.JFrame {
         g.tomarPeriodo(desde, hasta);
     }
     
-    public void solicitarSeleccionCategorias(Object[] categorias) {
-        DefaultListModel model = new DefaultListModel();
-                                
+    public void solicitarSeleccionCategorias(List categorias) {
+        categorias_model.removeAllElements();
+        categorias_seleccionadas_model.removeAllElements();
+        
         for(Object categoria : categorias){
-            model.addElement(categoria);            
+            categorias_model.addElement(categoria);            
         }
-        this.categorias_no_list.setModel(model);
-        this.categorias_no_list.removeAll();        
+        
         this.categorias_panel.setVisible(true);
-        // TODO: Implementar como mover los elementos de una lista a la otra.
     }
     
-    public void tomarSeleccionCategorias() {
-        ListModel<String> model = this.categorias_incluidas_list.getModel();
-        
-        Object[] categorias = new Object[model.getSize()];
-        for(int i = 0; i < categorias.length; i++){
-            categorias[i] = model.getElementAt(i);
-        }
+    public void tomarSeleccionCategorias() {       
+        Object[] categorias = new Object[categorias_seleccionadas_model.getSize()];
+        categorias_seleccionadas_model.copyInto(categorias);        
         g.tomarSeleccionCategorias(categorias);
         this.categorias_panel.setVisible(false);
         
@@ -506,6 +571,8 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JPanel fecha_panel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
