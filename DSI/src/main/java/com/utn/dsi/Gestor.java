@@ -5,7 +5,10 @@
  */
 package com.utn.dsi;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
+import java.util.Vector;
 
 /**
  *
@@ -13,6 +16,7 @@ import java.util.Date;
  */
 public class Gestor 
 {
+    private Pantalla pantalla;
     private Date periodo;
     private Date fechaActual;
     private String categorias;
@@ -20,43 +24,64 @@ public class Gestor
     private String zonas;
     private String seleccionZonas;
     private float promedioNormalizado;
-    
+  
     
     // VER TIPO DE DATOS DE RETORNO DE CADA METODO
     
+    Gestor(Pantalla p){
+        pantalla = p;
+    }
+    
     public void estadisticaConsumo()
     {
+        pantalla.solicitarPeriodo();
     }
     
-    public void tomarPedido()
+    public void tomarPeriodo(Date desde, Date hasta)
     {
+        if (validarPeriodo(desde, hasta)){
+            // TODO: Guardar periodo.
+            List<Categoria> cats = buscarCategorias();
+            pantalla.solicitarSeleccionCategorias(cats);
+        }
     }
     
-    public void obtenerFechaActual()
+    public Date obtenerFechaActual()
     {
+        return new Date(); // Por defecto es la fecha actual. Verificar.
     }
     
-    public void validarPeriodo()
+    public boolean validarPeriodo(Date desde, Date hasta)
     {
+        // TODO: Implementar
+        return true;
     }
     
-    public void buscarCategorias()
+    public List<Categoria> buscarCategorias()
     {
+        ArrayList<Categoria> list = new ArrayList<>();
+        // TODO: Buscar categorias.
+        list.add(new Categoria("test 1"));
+        list.add(new Categoria("test 2"));
+        list.add(new Categoria("test 3"));
+        
+        return list;       
     }
     
-    public void tomarSeleccionCategorias()
+    public void tomarSeleccionCategorias(Object[] categorias)
     {
+        // TODO: Castear a categoria
     }
     
     public void buscarZonas()
     {
     }
     
-    public void tomarSeleccionZona()
+    public void tomarSeleccionZonas(Object[] zonas)
     {
     }
     
-    public void tomarSeleccionMetodoEstadistico()
+    public void tomarSeleccionMetodoEstadistico(Object metodo)
     {
     }
     
