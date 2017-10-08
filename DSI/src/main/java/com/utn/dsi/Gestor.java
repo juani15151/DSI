@@ -8,7 +8,6 @@ package com.utn.dsi;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import java.util.Vector;
 
 /**
  *
@@ -16,13 +15,14 @@ import java.util.Vector;
  */
 public class Gestor 
 {
-    private Pantalla pantalla;
-    private Date periodo;
+    private final Pantalla pantalla;
+    private Date desde;
+    private Date hasta;
     private Date fechaActual;
-    private String categorias;
-    private String seleccionCategorias;
-    private String zonas;
-    private String seleccionZonas;
+    private List<Categoria> categorias;
+    private List<Categoria> seleccionCategorias;
+    private List<Zona> zonas;
+    private List<Zona> seleccionZonas;
     private float promedioNormalizado;
   
     
@@ -40,10 +40,18 @@ public class Gestor
     public void tomarPeriodo(Date desde, Date hasta)
     {
         if (validarPeriodo(desde, hasta)){
-            // TODO: Guardar periodo.
-            List<Categoria> cats = buscarCategorias();
-            pantalla.solicitarSeleccionCategorias(cats);
+            this.desde = desde;
+            this.hasta = hasta; 
+            
+            fechaActual = obtenerFechaActual();
+            categorias = buscarCategorias();
+            
+            pantalla.solicitarSeleccionCategorias(categorias);
+            
+        } else {
+           // TODO: Como manejar este caso? 
         }
+            
     }
     
     public Date obtenerFechaActual()
@@ -53,14 +61,21 @@ public class Gestor
     
     public boolean validarPeriodo(Date desde, Date hasta)
     {
-        // TODO: Implementar
+        if(desde.after(hasta)){
+            // Fecha desde es mayor a fecha hasta
+            return false;                    
+        } 
+        if(desde.after(fechaActual)){
+            // El periodo es en el futuro, no existen lecturas.
+            return false;
+        }
         return true;
     }
     
     public List<Categoria> buscarCategorias()
     {
         ArrayList<Categoria> list = new ArrayList<>();
-        // TODO: Buscar categorias.
+        // TODO: Buscar categorias.        
         list.add(new Categoria("test 1"));
         list.add(new Categoria("test 2"));
         list.add(new Categoria("test 3"));
@@ -70,19 +85,34 @@ public class Gestor
     
     public void tomarSeleccionCategorias(Object[] categorias)
     {
-        // TODO: Castear a categoria
+        for(Object categoria : categorias){
+            this.categorias.add((Categoria) categoria);
+        }
+        zonas = buscarZonas();
+        pantalla.solicitarSeleccionZonas(zonas);
     }
     
-    public void buscarZonas()
+    public List<Zona> buscarZonas()
     {
+        ArrayList<Zona> list = new ArrayList<>();
+        // TODO: Buscar categorias.
+        list.add(new Zona("test zona 1"));
+        list.add(new Zona("test zona 2"));
+        list.add(new Zona("test zona 3"));
+        
+        return list;       
     }
     
     public void tomarSeleccionZonas(Object[] zonas)
     {
+        for(Object zona : zonas){
+            this.zonas.add((Zona) zona);
+        }
     }
     
     public void tomarSeleccionMetodoEstadistico(Object metodo)
     {
+        
     }
     
     public void tomarConfirmacion()
