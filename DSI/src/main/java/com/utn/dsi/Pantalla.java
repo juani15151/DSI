@@ -6,6 +6,12 @@
 package com.utn.dsi;
 
 import java.awt.Point;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -13,7 +19,7 @@ import java.awt.Point;
  */
 public class Pantalla extends javax.swing.JFrame {
 
-    private Gestor g = new Gestor();
+    private Gestor g;
     private Point start_panel_location;
     /**
      * Creates new form Pantalla
@@ -22,6 +28,8 @@ public class Pantalla extends javax.swing.JFrame {
         initComponents();
         this.habilitarVentana();
         start_panel_location = this.fecha_panel.getLocation();
+        g = new Gestor(this);
+        g.estadisticaConsumo();
     }
 
     /**
@@ -46,6 +54,7 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         metodo_panel = new javax.swing.JPanel();
         metodo_combo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -121,7 +130,7 @@ public class Pantalla extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        categorias_no_list.setEnabled(false);
+        categorias_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         categorias_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
         jScrollPane1.setViewportView(categorias_no_list);
 
@@ -130,7 +139,7 @@ public class Pantalla extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        categorias_incluidas_list.setEnabled(false);
+        categorias_incluidas_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane2.setViewportView(categorias_incluidas_list);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -143,15 +152,22 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("No incluidas");
 
+        jButton2.setText("Confirmar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout categorias_panelLayout = new javax.swing.GroupLayout(categorias_panel);
         categorias_panel.setLayout(categorias_panelLayout);
         categorias_panelLayout.setHorizontalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categorias_panelLayout.createSequentialGroup()
+            .addGroup(categorias_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, categorias_panelLayout.createSequentialGroup()
+                .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(categorias_panelLayout.createSequentialGroup()
                         .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,7 +175,10 @@ public class Pantalla extends javax.swing.JFrame {
                         .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categorias_panelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         categorias_panelLayout.setVerticalGroup(
@@ -178,6 +197,8 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
 
@@ -216,7 +237,7 @@ public class Pantalla extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        zonas_no_list.setEnabled(false);
+        zonas_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         zonas_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
         jScrollPane3.setViewportView(zonas_no_list);
 
@@ -225,7 +246,7 @@ public class Pantalla extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        zonas_incluidas_list.setEnabled(false);
+        zonas_incluidas_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane4.setViewportView(zonas_incluidas_list);
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -345,6 +366,10 @@ public class Pantalla extends javax.swing.JFrame {
         tomarPeriodo();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        tomarSeleccionCategorias();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,9 +412,13 @@ public class Pantalla extends javax.swing.JFrame {
     private void habilitarVentana() {
         this.setEnabled(true);
         categorias_panel.setVisible(false);
+        categorias_panel.setLocation(start_panel_location);
         zonas_panel.setVisible(false);
+        zonas_panel.setLocation(start_panel_location);
         metodo_panel.setVisible(false);
+        metodo_panel.setLocation(start_panel_location);
         confirmacion_panel.setVisible(false);
+        confirmacion_panel.setLocation(start_panel_location);        
         this.setVisible(true);
     }
     
@@ -397,17 +426,43 @@ public class Pantalla extends javax.swing.JFrame {
         this.fecha_panel.setVisible(true); 
     }
     
-    public void tomarPeriodo() {
+    public void tomarPeriodo() {        
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date desde, hasta;
+        try {
+        desde = df.parse(fecha_desde_field.getText());
+        hasta = df.parse(fecha_hasta_field.getText());
+        } 
+        catch (ParseException pe){
+            // TODO: Informar al usuario que puso mal las fechas.
+            return;
+        }
+        
         this.fecha_panel.setVisible(false);
-        solicitarSeleccionCategorias(); // TODO: Borrar
+        g.tomarPeriodo(desde, hasta);
     }
     
-    public void solicitarSeleccionCategorias() {
-        categorias_panel.setLocation(fecha_panel.getLocation());
+    public void solicitarSeleccionCategorias(Object[] categorias) {
+        DefaultListModel model = new DefaultListModel();
+                                
+        for(Object categoria : categorias){
+            model.addElement(categoria);            
+        }
+        this.categorias_no_list.setModel(model);
+        this.categorias_no_list.removeAll();        
         this.categorias_panel.setVisible(true);
+        // TODO: Implementar como mover los elementos de una lista a la otra.
     }
     
     public void tomarSeleccionCategorias() {
+        ListModel<String> model = this.categorias_incluidas_list.getModel();
+        
+        Object[] categorias = new Object[model.getSize()];
+        for(int i = 0; i < categorias.length; i++){
+            categorias[i] = model.getElementAt(i);
+        }
+        g.tomarSeleccionCategorias(categorias);
+        this.categorias_panel.setVisible(false);
         
     }
     
@@ -450,6 +505,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField fecha_hasta_field;
     private javax.swing.JPanel fecha_panel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

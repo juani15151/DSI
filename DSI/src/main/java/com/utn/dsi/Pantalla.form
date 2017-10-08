@@ -148,9 +148,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -163,6 +163,10 @@
                               <Component id="jLabel3" pref="200" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -191,6 +195,8 @@
                       <Component id="jScrollPane2" min="-2" pref="160" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -214,7 +220,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="selectionMode" type="int" value="1"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[61, 200]"/>
                 </Property>
@@ -243,7 +249,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="selectionMode" type="int" value="1"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -271,6 +277,14 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="No incluidas"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Confirmar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -402,7 +416,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="selectionMode" type="int" value="1"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[61, 200]"/>
                 </Property>
@@ -431,7 +445,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="selectionMode" type="int" value="1"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
