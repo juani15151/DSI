@@ -7,8 +7,20 @@ package com.utn.dsi;
 
 /**
  *
- * @author juani
+ * @author Gaston
  */
-public class Localidad {
+public class Localidad 
+{
+    private String nombre;
+    
+    // ver tipo de dato de retorno
+    public void buscarZonasDeLocalidad()
+    {
+    }
+    
+    // ver tipo de dato de retorno
+    public void buscarPromedioNormalizado()
+    {
+    }
     
 }

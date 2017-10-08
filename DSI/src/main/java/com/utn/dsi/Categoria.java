@@ -7,8 +7,18 @@ package com.utn.dsi;
 
 /**
  *
- * @author juani
+ * @author Gaston
  */
-public class Categoria {
+public class Categoria 
+{
+    private Float m3BasicosDesde;
+    private Float M3BasicosHasta;
+    private Float montoBasico;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+    
     
 }
