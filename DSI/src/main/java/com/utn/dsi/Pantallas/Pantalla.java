@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,7 +59,7 @@ public class Pantalla extends javax.swing.JFrame {
         fecha_panel = new javax.swing.JPanel();
         fecha_desde_field = new javax.swing.JFormattedTextField();
         fecha_hasta_field = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmarPeriodo = new javax.swing.JButton();
         categorias_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         categorias_no_list = new javax.swing.JList<>();
@@ -67,13 +68,13 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnConfirmarCategorias = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         metodo_panel = new javax.swing.JPanel();
         metodo_combo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnConfirmarMetodo = new javax.swing.JButton();
         zonas_panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         zonas_no_list = new javax.swing.JList<>();
@@ -82,9 +83,9 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        confimar_zonas_button = new javax.swing.JButton();
-        rm_zonas_button = new javax.swing.JButton();
-        add_zonas_button = new javax.swing.JButton();
+        btnConfirmarZonas = new javax.swing.JButton();
+        btnEliminarZonas = new javax.swing.JButton();
+        btnAddZonas = new javax.swing.JButton();
         confirmacion_panel = new javax.swing.JPanel();
         confirmar_button = new javax.swing.JButton();
 
@@ -110,10 +111,10 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmarPeriodo.setText("Confirmar");
+        btnConfirmarPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmarPeriodoActionPerformed(evt);
             }
         });
 
@@ -128,7 +129,7 @@ public class Pantalla extends javax.swing.JFrame {
                         .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnConfirmarPeriodo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         fecha_panelLayout.setVerticalGroup(
@@ -139,7 +140,7 @@ public class Pantalla extends javax.swing.JFrame {
                     .addComponent(fecha_desde_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fecha_hasta_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnConfirmarPeriodo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -174,24 +175,24 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("No incluidas");
 
-        jButton2.setText("Confirmar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmarCategorias.setText("Confirmar");
+        btnConfirmarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnConfirmarCategoriasActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Agregar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Eliminar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -202,23 +203,22 @@ public class Pantalla extends javax.swing.JFrame {
             .addGroup(categorias_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(categorias_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, categorias_panelLayout.createSequentialGroup()
                         .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
+                            .addComponent(btnConfirmarCategorias)
                             .addGroup(categorias_panelLayout.createSequentialGroup()
                                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(jScrollPane1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         categorias_panelLayout.setVerticalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,10 +238,10 @@ public class Pantalla extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnConfirmarCategorias)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -251,10 +251,10 @@ public class Pantalla extends javax.swing.JFrame {
 
         jLabel2.setText("Método Estadístico");
 
-        jButton4.setText("Confirmar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmarMetodo.setText("Confirmar");
+        btnConfirmarMetodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnConfirmarMetodoActionPerformed(evt);
             }
         });
 
@@ -268,10 +268,10 @@ public class Pantalla extends javax.swing.JFrame {
                     .addGroup(metodo_panelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metodo_combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(metodo_combo, 0, 324, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metodo_panelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btnConfirmarMetodo)))
                 .addContainerGap())
         );
         metodo_panelLayout.setVerticalGroup(
@@ -282,7 +282,7 @@ public class Pantalla extends javax.swing.JFrame {
                     .addComponent(metodo_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btnConfirmarMetodo)
                 .addContainerGap())
         );
 
@@ -315,24 +315,24 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("No incluidas");
 
-        confimar_zonas_button.setText("Confirmar");
-        confimar_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmarZonas.setText("Confirmar");
+        btnConfirmarZonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confimar_zonas_buttonActionPerformed(evt);
+                btnConfirmarZonasActionPerformed(evt);
             }
         });
 
-        rm_zonas_button.setText("Eliminar");
-        rm_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarZonas.setText("Eliminar");
+        btnEliminarZonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rm_zonas_buttonActionPerformed(evt);
+                btnEliminarZonasActionPerformed(evt);
             }
         });
 
-        add_zonas_button.setText("Agregar");
-        add_zonas_button.addActionListener(new java.awt.event.ActionListener() {
+        btnAddZonas.setText("Agregar");
+        btnAddZonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_zonas_buttonActionPerformed(evt);
+                btnAddZonasActionPerformed(evt);
             }
         });
 
@@ -344,15 +344,15 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(confimar_zonas_button, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnConfirmarZonas, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(zonas_panelLayout.createSequentialGroup()
                         .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(add_zonas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnAddZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rm_zonas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(zonas_panelLayout.createSequentialGroup()
                                 .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane4)
@@ -378,10 +378,10 @@ public class Pantalla extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(zonas_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(add_zonas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rm_zonas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarZonas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(confimar_zonas_button)
+                .addComponent(btnConfirmarZonas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -418,31 +418,36 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fecha_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(metodo_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(categorias_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(zonas_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(categorias_panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(zonas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(172, 172, 172))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titulo)
-                .addGap(18, 18, 18)
-                .addComponent(fecha_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(categorias_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(zonas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(titulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(fecha_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(categorias_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(zonas_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(metodo_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(confirmacion_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         getAccessibleContext().setAccessibleName("Estadistica de Consumos");
@@ -455,41 +460,41 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fecha_hasta_fieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPeriodoActionPerformed
         tomarPeriodo();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnConfirmarPeriodoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnConfirmarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCategoriasActionPerformed
         tomarSeleccionCategorias();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnConfirmarCategoriasActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         move_selected_items(this.categorias_no_list,
                 this.categorias_incluidas_list);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         move_selected_items(this.categorias_incluidas_list, 
                 this.categorias_no_list);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void confimar_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confimar_zonas_buttonActionPerformed
+    private void btnConfirmarZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarZonasActionPerformed
         tomarSeleccionZonas();
-    }//GEN-LAST:event_confimar_zonas_buttonActionPerformed
+    }//GEN-LAST:event_btnConfirmarZonasActionPerformed
 
-    private void rm_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rm_zonas_buttonActionPerformed
+    private void btnEliminarZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarZonasActionPerformed
         move_selected_items(this.zonas_incluidas_list,
                 this.zonas_no_list);
-    }//GEN-LAST:event_rm_zonas_buttonActionPerformed
+    }//GEN-LAST:event_btnEliminarZonasActionPerformed
 
-    private void add_zonas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_zonas_buttonActionPerformed
+    private void btnAddZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddZonasActionPerformed
         move_selected_items(this.zonas_no_list,
                 this.zonas_incluidas_list);
-    }//GEN-LAST:event_add_zonas_buttonActionPerformed
+    }//GEN-LAST:event_btnAddZonasActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnConfirmarMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarMetodoActionPerformed
         tomarSeleccionMetodoEstadistico();        
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnConfirmarMetodoActionPerformed
 
     private void confirmar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmar_buttonActionPerformed
         tomarConfirmacion();
@@ -525,7 +530,7 @@ public class Pantalla extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -574,11 +579,11 @@ public class Pantalla extends javax.swing.JFrame {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date desde, hasta;
         try {
-        desde = df.parse(fecha_desde_field.getText());
-        hasta = df.parse(fecha_hasta_field.getText());
+            desde = df.parse(fecha_desde_field.getText());
+            hasta = df.parse(fecha_hasta_field.getText());
         } 
         catch (ParseException pe){
-            // TODO: Informar al usuario que puso mal las fechas.
+            JOptionPane.showMessageDialog(null, "Error, fechas mal ingresadas.");
             return;
         }
         
@@ -660,21 +665,22 @@ public class Pantalla extends javax.swing.JFrame {
             
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add_zonas_button;
+    private javax.swing.JButton btnAddZonas;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConfirmarCategorias;
+    private javax.swing.JButton btnConfirmarMetodo;
+    private javax.swing.JButton btnConfirmarPeriodo;
+    private javax.swing.JButton btnConfirmarZonas;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarZonas;
     private javax.swing.JList<String> categorias_incluidas_list;
     private javax.swing.JList<String> categorias_no_list;
     private javax.swing.JPanel categorias_panel;
-    private javax.swing.JButton confimar_zonas_button;
     private javax.swing.JPanel confirmacion_panel;
     private javax.swing.JButton confirmar_button;
     private javax.swing.JFormattedTextField fecha_desde_field;
     private javax.swing.JFormattedTextField fecha_hasta_field;
     private javax.swing.JPanel fecha_panel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -688,7 +694,6 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> metodo_combo;
     private javax.swing.JPanel metodo_panel;
-    private javax.swing.JButton rm_zonas_button;
     private javax.swing.JLabel titulo;
     private javax.swing.JList<String> zonas_incluidas_list;
     private javax.swing.JList<String> zonas_no_list;
