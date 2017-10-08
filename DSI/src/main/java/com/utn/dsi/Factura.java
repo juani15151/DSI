@@ -21,7 +21,9 @@ public class Factura
     private List<DetalleConceptoFacturado> detalles;
     private PeriodoFacturacion periodo;
 
-
+    public boolean esLecturaDePeriodo(Date desde, Date hasta){
+        return desde.before(fechaHoraLectura) && hasta.after(fechaHoraLectura);
+    }
     
     public boolean esDePeriodo(Date desde, Date hasta)
     {
