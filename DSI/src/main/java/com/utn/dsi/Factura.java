@@ -25,6 +25,15 @@ public class Factura implements Comparable<Factura>
     private float valorCorregido; // No esta en el diagrama de la profe.
     private float valorLectura; // No esta en el diagrama de la profe.   
 
+    public Factura(int numeroFactura, int diasDeLecturaFacturados, Date fechaFacturacion, Double m3consumidos, Date fechaHoraLectura, PeriodoFacturacion periodo) {
+        this.numeroFactura = numeroFactura;
+        this.diasDeLecturaFacturados = diasDeLecturaFacturados;
+        this.fechaFacturacion = fechaFacturacion;
+        this.m3consumidos = m3consumidos;
+        this.fechaHoraLectura = fechaHoraLectura;
+        this.periodo = periodo;
+    }
+
     
     public Double getM3consumidos() {
         return m3consumidos;

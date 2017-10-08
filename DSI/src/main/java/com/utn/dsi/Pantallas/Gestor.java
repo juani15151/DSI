@@ -10,11 +10,13 @@ import com.utn.dsi.Estrategias.IEstrategiaEstadistica;
 import com.utn.dsi.Estrategias.MediaConDE;
 import com.utn.dsi.Estrategias.PromedioNormalizado;
 import com.utn.dsi.Estrategias.Sumatoria;
+import com.utn.dsi.Localidad;
 import com.utn.dsi.Zona;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedList;
+import persistencia.Persistencia;
 
 /**
  *
@@ -101,13 +103,12 @@ public class Gestor
     
     public List<Zona> buscarZonas()
     {
-        ArrayList<Zona> list = new ArrayList<>();
-        // TODO: Buscar categorias.
-        list.add(new Zona("test zona 1"));
-        list.add(new Zona("test zona 2"));
-        list.add(new Zona("test zona 3"));
-        
-        return list;       
+        List<Localidad> localidades = Persistencia.getLocalidades();
+        List<Zona> zonas = new LinkedList();
+        for(Localidad l : localidades){
+            zonas.addAll(l.getZonas());
+        }        
+        return zonas;       
     }
     
     public void tomarSeleccionZonas(Object[] zonas)

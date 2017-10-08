@@ -5,14 +5,11 @@
  */
 package com.utn.dsi;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -26,7 +23,11 @@ public class Propiedad
     private int numero;
     private int piso;
     private List<Servicio> servicios;
-    
+
+    public Propiedad(int nroIdentificacionCatastral, List<Servicio> servicios) {
+        this.nroIdentificacionCatastral = nroIdentificacionCatastral;
+        this.servicios = servicios;
+    }
     
     public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {      

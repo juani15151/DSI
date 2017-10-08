@@ -21,9 +21,10 @@ public class Zona
     private String nombre;
     private List<Propiedad> propiedades;
 
-    public Zona(String nombre) 
+    public Zona(String nombre, List<Propiedad> propiedades) 
     {
         this.nombre = nombre;
+        this.propiedades = propiedades;
     }
 
     public String getNombre() 

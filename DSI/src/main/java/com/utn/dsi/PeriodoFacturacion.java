@@ -16,6 +16,19 @@ public class PeriodoFacturacion {
     private Date desde;
     private Date hasta;
     private String nombre;
+
+    public PeriodoFacturacion(Date desde, Date hasta) {
+        this.desde = desde;
+        this.hasta = hasta;
+    }
+
+    public Date getDesde() {
+        return desde;
+    }
+
+    public Date getHasta() {
+        return hasta;
+    }   
     
     public boolean incluidoEnPeriodo(Date desde, Date hasta){
         // TODO: Creo que no contempla iguales. Verificar.

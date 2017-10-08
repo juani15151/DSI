@@ -6,7 +6,6 @@
 package com.utn.dsi;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,10 +17,16 @@ public class Servicio
 {
     private Date fechaAlta;
     private Date fechaDeSolicitud;
-    private Set<Factura> facturas;
+    private List<Factura> facturas;
     private Categoria categoria;
+
+    public Servicio(Date fechaAlta, List<Factura> facturas, Categoria categoria) {
+        this.fechaAlta = fechaAlta;
+        this.facturas = facturas;
+        this.categoria = categoria;
+    }
     
-    // ver tipo de dato de retorno en cada metodo
+    
     
     public boolean esDeCategoria(Categoria cat)            
     {
@@ -41,7 +46,7 @@ public class Servicio
     
     public boolean esPeriodoValido(Date desde, Date hasta)
     {
-        return true;
+        return fechaAlta.after(desde) && fechaAlta.before(hasta);
     }
     
     public Double buscarPromedioNormalizado(Date desde, Date hasta)

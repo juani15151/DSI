@@ -5,6 +5,8 @@
  */
 package com.utn.dsi;
 
+import java.util.List;
+
 /**
  *
  * @author Gaston
@@ -12,6 +14,18 @@ package com.utn.dsi;
 public class Localidad 
 {
     private String nombre;
+    private List<Zona> zonas;
+
+    public Localidad(String nombre, List<Zona> zonas) {
+        this.nombre = nombre;
+        this.zonas = zonas;
+    }  
+
+    public List<Zona> getZonas() {
+        // TODO: Devolver una copia.
+        return zonas;
+    }
+
     
     // ver tipo de dato de retorno
     public void buscarZonasDeLocalidad()
