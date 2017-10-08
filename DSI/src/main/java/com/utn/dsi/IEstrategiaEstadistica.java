@@ -5,11 +5,14 @@
  */
 package com.utn.dsi;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author Gaston
  */
 public interface IEstrategiaEstadistica 
 {
-    
+    int calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta);
 }
