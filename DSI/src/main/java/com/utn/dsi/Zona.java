@@ -37,22 +37,30 @@ public class Zona
     }
     
     
-    public double buscarPromedioNormalizado(Categoria cat, Date desde, Date hasta)
+    public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {
-        double suma = 0;
-        int count = 0;
-        for(Propiedad p : propiedades){
-            suma += p.buscarPromedioNormalizado(cat, desde, hasta);
-            count++;
+        Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
+        Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
+        
+        Double suma;
+        Integer count;
+        
+        for(Propiedad p : propiedades) {
+            for(Entry<Categoria, Double> e : p.buscarPromedioNormalizado(cats, desde, hasta).entrySet()){    
+                sumatoria_por_categoria.merge(e.getKey(), e.getValue(), Double::sum);
+                count_por_categoria.merge(e.getKey(),1, Integer::sum);
+            }
+            
             
         }
-        // TODO: Calcular promedio normalizado.
-        double promedioNormalizado = -1;
-        return promedioNormalizado;        
+        for(Entry<Categoria, Double> e : sumatoria_por_categoria.entrySet()){
+            // Divide todas las sumatorias por lo count.
+            e.setValue(e.getValue() / count_por_categoria.get(e.getKey()));
+        }
+        return sumatoria_por_categoria;
     }
     
     public Map buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){
-        Double estadistica_zona = 0.0;
         Map<Categoria, Double> estadistica_por_categorias = new HashMap<>();
         
         for(Propiedad p : propiedades){

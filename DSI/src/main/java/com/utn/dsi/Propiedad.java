@@ -5,10 +5,13 @@
  */
 package com.utn.dsi;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,21 +29,32 @@ public class Propiedad
     
     
     public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
-    {
-        throw new NotImplementedException();
-        // TODO: Hacer.
-        Map<Categoria, Double> estadistica_por_categoria = new Map<>();
-
+    {      
+        Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
+        Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
+        
+        Double suma;
+        Integer count;
         for(Servicio s : servicios){
+            // TODO: Que pasa si no tiene ningun servicio valido?
             if(s.esDeCategoria(cats) && s.esPeriodoValido(desde, hasta)){
-                
+                // Suma el total de consumo del servicio con el resto
+                // de la misma categoria.
+                suma = sumatoria_por_categoria.getOrDefault(s.getCategoria(), 0.0);
+                count = count_por_categoria.getOrDefault(s.getCategoria(), 0);
                 suma += s.buscarPromedioNormalizado(desde, hasta);
-                count++;
+                sumatoria_por_categoria.put(s.getCategoria(), suma);
+                count_por_categoria.put(s.getCategoria(), ++count);
             }
         }
-        // TODO: Calcular promedio normalizado.
-        double promedioNormalizado = -1;
-        return promedioNormalizado;
+        
+        for(Entry<Categoria, Double> e : sumatoria_por_categoria.entrySet()){
+            // Divide todas las sumatorias por lo count.
+            e.setValue(e.getValue() / count_por_categoria.get(e.getKey()));
+        }
+        
+        return sumatoria_por_categoria;
+        
     }
     
     public Map<Categoria, Double> buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){

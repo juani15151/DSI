@@ -44,21 +44,19 @@ public class Servicio
         return true;
     }
     
-    public double buscarPromedioNormalizado(Date desde, Date hasta)
+    public Double buscarPromedioNormalizado(Date desde, Date hasta)
     {
-        double suma = 0;
+        double suma = 0.0;
         int count = 0;
         for( Factura factura : facturas){
             if (factura.esLecturaDePeriodo(desde, hasta)){
-                // Nota: No estoy seguro que esta lógica funcione
-                // estariamos promediando promedios...
                 suma += factura.calcularPromedioNormalizado();
                 count++;
             }
         }
-        // TODO: Calcular promedio normalizado
-        double promedioNormalizado = -1;
-        return promedioNormalizado;
+        // Nota: No estoy seguro que esta lógica funcione
+        // estariamos promediando promedios...
+        return suma / count;
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){

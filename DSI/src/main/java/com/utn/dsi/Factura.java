@@ -42,21 +42,7 @@ public class Factura implements Comparable<Factura>
 
     public double calcularPromedioNormalizado()
     {
-        
-        double total = calcularTotal();
-        // TODO: Calcular promedio normalizado (como era?)
-        double promedioNormalizado = -1;
-        
-        return promedioNormalizado;
-    }
-
-    public double calcularTotal()
-    {
-        double suma = 0;
-        for(DetalleConceptoFacturado detalle : detalles){
-            suma += detalle.getSubTotal();
-        }
-        return suma;        
+        return (m3consumidos / diasDeLecturaFacturados) * 30 ;
     }
 
     @Override
