@@ -126,7 +126,7 @@ public class Gestor
     
     public void tomarConfirmacion()
     {
-        //generarReporte(calcularEstadistica());
+        generarReporte(calcularEstadistica());
         pantalla.solicitarDecisionImpresion();
     }
     

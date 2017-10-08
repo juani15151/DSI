@@ -55,5 +55,10 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
         return estadisticas;
     }   
     
+    @Override
+    public String toString(){
+        return "Promedio Normalizado";
+    }
+    
 }
 

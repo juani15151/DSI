@@ -47,4 +47,8 @@ public class Sumatoria implements IEstrategiaEstadistica {
         return estadisticas;
     }
     
+    @Override
+    public String toString(){
+        return "Sumatoria";
+    }
 }
