@@ -9,11 +9,12 @@ package com.utn.dsi;
  *
  * @author Gaston
  */
-public class Zona 
+public class Zona extends Localidad
 {
     private String nombre;
 
-    public Zona(String nombre) {
+    public Zona(String nombre) 
+    {
         this.nombre = nombre;
     }
     
@@ -21,13 +22,17 @@ public class Zona
     {
     }
 
-    public String getNombre() {
+    public String getNombre() 
+    {
         return nombre;
+    }
+    
+    // ver tipo de dato de retorno
+    public void buscarPromedioNormailizado()
+    {
+        
     }
     
     
 
-}
-    
-    
 }
