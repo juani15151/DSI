@@ -6,10 +6,15 @@
 package com.utn.dsi.Pantallas;
 
 import com.utn.dsi.Categoria;
+import com.utn.dsi.Estrategias.IEstrategiaEstadistica;
+import com.utn.dsi.Estrategias.MediaConDE;
+import com.utn.dsi.Estrategias.PromedioNormalizado;
+import com.utn.dsi.Estrategias.Sumatoria;
 import com.utn.dsi.Zona;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  *
@@ -25,13 +30,18 @@ public class Gestor
     private List<Categoria> seleccionCategorias;
     private List<Zona> zonas;
     private List<Zona> seleccionZonas;
-    private float promedioNormalizado;
+    private final List<IEstrategiaEstadistica> estrategias;
+    private IEstrategiaEstadistica estrategiaSeleccionada;
   
     
     // VER TIPO DE DATOS DE RETORNO DE CADA METODO
     
     Gestor(Pantalla p){
         pantalla = p;
+        estrategias = new LinkedList<>();
+        estrategias.add(new Sumatoria());
+        estrategias.add(new PromedioNormalizado());
+        //metodos.add(new MediaConDE());
     }
     
     public void estadisticaConsumo()
@@ -81,6 +91,7 @@ public class Gestor
     
     public void tomarSeleccionCategorias(Object[] categorias)
     {
+        System.out.println("Gestor::tomarSeleccionCategorias() invocado.");
         for(Object categoria : categorias){
             this.categorias.add((Categoria) categoria);
         }
@@ -103,24 +114,32 @@ public class Gestor
     {
         for(Object zona : zonas){
             this.zonas.add((Zona) zona);
-        }
+        }        
+        pantalla.solicitarSeleccionMetodoEstadistico(estrategias);
     }
     
-    public void tomarSeleccionMetodoEstadistico(Object metodo)
+    public void tomarSeleccionMetodoEstadistico(Object estrategia)
     {
-        
+        estrategiaSeleccionada = (IEstrategiaEstadistica) estrategia;
+        pantalla.solicitarConfirmacion();
     }
     
     public void tomarConfirmacion()
     {
+        generarReporte(calcularEstadistica());
+        pantalla.solicitarDecisionImpresion();
     }
     
-    public void calcularPromedioNormalizado()
+    public List calcularEstadistica()
     {
+        return estrategiaSeleccionada.calcularEstadistica(seleccionZonas, 
+                seleccionCategorias, desde, hasta);
     }
     
-    public void generarReporte()
+    public void generarReporte(List estadisticas)
     {
+        //TODO: Implementar.
+        pantalla.mostrarReporte();
     }
     
     public void tomarDecisionImpresion()
