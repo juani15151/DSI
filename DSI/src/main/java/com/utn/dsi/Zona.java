@@ -17,13 +17,13 @@ public class Zona extends Localidad
     {
         this.nombre = nombre;
     }
-    
-    public Zona()
-    {
-    }
 
     public String getNombre() 
     {
+        return nombre;
+    }
+    
+    public String toString(){
         return nombre;
     }
     

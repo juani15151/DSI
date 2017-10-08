@@ -6,6 +6,7 @@
 package com.utn.dsi;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -17,19 +18,33 @@ public class Factura
     private Date fechaHoraLectura;
     private float valorCorregido;
     private float valorLectura;
+    private List<DetalleConceptoFacturado> detalles;
+    private PeriodoFacturacion periodo;
 
 
-    // ver tipo de dato de retorno de cada metodo
-    public void esDePeriodo()
+    
+    public boolean esDePeriodo(Date desde, Date hasta)
     {
+        return periodo.incluidoEnPeriodo(desde, hasta);
     }
 
-    public void calcularPromedioNormalizado()
+    public double calcularPromedioNormalizado()
     {
+        
+        double total = calcularTotal();
+        // TODO: Calcular promedio normalizado (como era?)
+        double promedioNormalizado = -1;
+        
+        return promedioNormalizado;
     }
 
-    public void calcularTotal()
+    public double calcularTotal()
     {
+        double suma = 0;
+        for(DetalleConceptoFacturado detalle : detalles){
+            suma += detalle.getSubTotal();
+        }
+        return suma;        
     }
  
 }
