@@ -641,7 +641,7 @@ public class Pantalla extends javax.swing.JFrame {
         categorias_seleccionadas_model.removeAllElements();
 
         for (Object categoria : categorias) {
-            categorias_model.addElement(categoria);
+            categorias_seleccionadas_model.addElement(categoria);
         }
         
         this.categorias_panel.setVisible(true);
@@ -659,7 +659,7 @@ public class Pantalla extends javax.swing.JFrame {
         zonas_seleccionadas_model.removeAllElements();
 
         for (Object zona : zonas) {
-            zonas_model.addElement(zona);
+            zonas_seleccionadas_model.addElement(zona);
         }      
 
         this.zonas_panel.setVisible(true);
