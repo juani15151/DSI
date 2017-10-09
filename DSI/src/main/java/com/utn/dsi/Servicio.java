@@ -35,9 +35,9 @@ public class Servicio
     
     public boolean esDeCategoria(List<Categoria> cats){
         for(Categoria cat : cats){
-            if(!esDeCategoria(cat)) return false;
+            if(esDeCategoria(cat)) return true;
         }
-        return true;
+        return false;
     }
     
     public Categoria getCategoria(){
@@ -65,9 +65,10 @@ public class Servicio
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){
+        System.out.println("Servicio::calcularSumatoria();");
         double suma = 0.0;
                 
-        for( Factura factura : facturas){
+        for(Factura factura : facturas){
             if (factura.esLecturaDePeriodo(desde, hasta)){
                 suma += factura.getM3consumidos();
             }

@@ -62,6 +62,7 @@ public class Zona
     }
     
     public Map buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){
+        System.out.println("Zona::buscarSumatoria()");
         Map<Categoria, Double> estadistica_por_categorias = new HashMap<>();
         
         for(Propiedad p : propiedades){

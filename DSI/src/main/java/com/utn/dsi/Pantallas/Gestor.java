@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
 import persistencia.Persistencia;
 
 /**
@@ -135,7 +137,16 @@ public class Gestor
     public void generarReporte(List estadisticas)
     {
         //TODO: Implementar.
-        pantalla.mostrarReporte();
+        StringBuilder reporte_zonas = new StringBuilder();
+        Map<Zona, Double> mapa_zonas = (Map<Zona, Double>) estadisticas.get(0);
+        for(Entry<Zona, Double> e : mapa_zonas.entrySet()){
+            reporte_zonas.append(e.getKey());
+            reporte_zonas.append(" -> ");
+            reporte_zonas.append(e.getValue());
+            reporte_zonas.append("\n");
+        }
+        
+        pantalla.mostrarReporteZonas(reporte_zonas.toString());
     }
     
     public void tomarDecisionImpresion(boolean print)

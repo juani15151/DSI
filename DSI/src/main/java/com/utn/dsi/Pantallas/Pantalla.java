@@ -96,6 +96,9 @@ public class Pantalla extends javax.swing.JFrame {
         btnConfirmarMetodo = new javax.swing.JButton();
         confirmacion_panel = new javax.swing.JPanel();
         confirmar_button = new javax.swing.JButton();
+        reporte_panel = new javax.swing.JPanel();
+        reporte_zonas = new javax.swing.JLabel();
+        reporte_categorias = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estadística de Consumos");
@@ -436,6 +439,33 @@ public class Pantalla extends javax.swing.JFrame {
 
         jPanel1.add(confirmacion_panel);
 
+        reporte_zonas.setText("Zonas");
+
+        reporte_categorias.setText("Categorias");
+
+        javax.swing.GroupLayout reporte_panelLayout = new javax.swing.GroupLayout(reporte_panel);
+        reporte_panel.setLayout(reporte_panelLayout);
+        reporte_panelLayout.setHorizontalGroup(
+            reporte_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporte_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(reporte_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reporte_zonas)
+                    .addComponent(reporte_categorias))
+                .addContainerGap(361, Short.MAX_VALUE))
+        );
+        reporte_panelLayout.setVerticalGroup(
+            reporte_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reporte_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reporte_zonas)
+                .addGap(18, 18, 18)
+                .addComponent(reporte_categorias)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(reporte_panel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -664,8 +694,14 @@ public class Pantalla extends javax.swing.JFrame {
         g.tomarConfirmacion();
     }
 
-    public void mostrarReporte() {
-
+    public void mostrarReporteZonas(String reporte) {
+        this.reporte_zonas.setText(reporte);
+        this.reporte_panel.setVisible(true);
+    }
+    
+    public void mostrarReporteCategorias(String reporte){
+        this.reporte_categorias.setText(reporte);
+        this.reporte_panel.setVisible(true);
     }
 
     public void solicitarDecisionImpresion() {
@@ -727,6 +763,9 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> metodo_combo;
     private javax.swing.JPanel metodo_panel;
+    private javax.swing.JLabel reporte_categorias;
+    private javax.swing.JPanel reporte_panel;
+    private javax.swing.JLabel reporte_zonas;
     private javax.swing.JLabel titulo;
     private javax.swing.JList<String> zonas_incluidas_list;
     private javax.swing.JList<String> zonas_no_list;

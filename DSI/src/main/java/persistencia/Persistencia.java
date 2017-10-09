@@ -111,8 +111,9 @@ public class Persistencia {
         if(desde.after(hasta)){
             Date aux = desde;
             desde = hasta;
-            hasta = desde;
+            hasta = aux;
         }
+        if(desde.equals(hasta)) System.out.println("Los limites de fechas son iguales.");
         
         long MILLIS_PER_DAY = 1000*60*60*24;
         GregorianCalendar s = new GregorianCalendar();
