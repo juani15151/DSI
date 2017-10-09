@@ -151,7 +151,7 @@ public class Gestor
     
     public void tomarDecisionImpresion(boolean print)
     {
-        
+        if(print) System.out.println("Imprimiendo reporte...");        
     }
     
 }
