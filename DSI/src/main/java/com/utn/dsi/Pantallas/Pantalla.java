@@ -63,7 +63,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void initComponents() {
 
         titulo = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        layoutPanel = new javax.swing.JPanel();
         fecha_panel = new javax.swing.JPanel();
         fecha_desde_field = new javax.swing.JFormattedTextField();
         fecha_hasta_field = new javax.swing.JFormattedTextField();
@@ -116,7 +116,10 @@ public class Pantalla extends javax.swing.JFrame {
         titulo.setPreferredSize(new java.awt.Dimension(440, 43));
         titulo.setRequestFocusEnabled(false);
 
-        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
+        layoutPanel.setMaximumSize(new java.awt.Dimension(1200, 800));
+        layoutPanel.setLayout(new javax.swing.OverlayLayout(layoutPanel));
+
+        fecha_panel.setMaximumSize(layoutPanel.getMaximumSize());
 
         fecha_desde_field.setText("Desde (dd/mm/aaaa)");
         fecha_desde_field.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -170,7 +173,9 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(fecha_panel);
+        layoutPanel.add(fecha_panel);
+
+        zonas_panel.setMaximumSize(layoutPanel.getMaximumSize());
 
         zonas_no_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -269,7 +274,12 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(zonas_panel);
+        layoutPanel.add(zonas_panel);
+
+        categorias_panel.setMaximumSize(layoutPanel.getMaximumSize());
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 200));
 
         categorias_no_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -277,9 +287,13 @@ public class Pantalla extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         categorias_no_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        categorias_no_list.setMaximumSize(new java.awt.Dimension(61, 200));
-        categorias_no_list.setMinimumSize(new java.awt.Dimension(61, 200));
+        categorias_no_list.setMaximumSize(new java.awt.Dimension(200, 200));
+        categorias_no_list.setMinimumSize(new java.awt.Dimension(200, 200));
+        categorias_no_list.setPreferredSize(new java.awt.Dimension(200, 200));
         jScrollPane1.setViewportView(categorias_no_list);
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 200));
 
         categorias_incluidas_list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -326,7 +340,7 @@ public class Pantalla extends javax.swing.JFrame {
         categorias_panelLayout.setHorizontalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categorias_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, categorias_panelLayout.createSequentialGroup()
@@ -335,22 +349,22 @@ public class Pantalla extends javax.swing.JFrame {
                             .addGroup(categorias_panelLayout.createSequentialGroup()
                                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
                                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, 0)))
+                .addGap(12, 12, 12))
         );
         categorias_panelLayout.setVerticalGroup(
             categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categorias_panelLayout.createSequentialGroup()
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(categorias_panelLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel1))
                     .addGroup(categorias_panelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -359,8 +373,8 @@ public class Pantalla extends javax.swing.JFrame {
                             .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(categorias_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,7 +384,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(categorias_panel);
+        layoutPanel.add(categorias_panel);
 
         metodo_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -393,7 +407,7 @@ public class Pantalla extends javax.swing.JFrame {
                     .addGroup(metodo_panelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metodo_combo, 0, 251, Short.MAX_VALUE))
+                        .addComponent(metodo_combo, 0, 1, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metodo_panelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnConfirmarMetodo)))
@@ -411,7 +425,9 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(metodo_panel);
+        layoutPanel.add(metodo_panel);
+
+        confirmacion_panel.setMaximumSize(layoutPanel.getMaximumSize());
 
         confirmar_button.setText("Confirmar");
         confirmar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -437,7 +453,9 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(confirmacion_panel);
+        layoutPanel.add(confirmacion_panel);
+
+        reporte_panel.setMaximumSize(layoutPanel.getMaximumSize());
 
         reporte_zonas.setText("Zonas");
 
@@ -452,7 +470,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addGroup(reporte_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(reporte_zonas)
                     .addComponent(reporte_categorias))
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         reporte_panelLayout.setVerticalGroup(
             reporte_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +482,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(reporte_panel);
+        layoutPanel.add(reporte_panel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -473,20 +491,20 @@ public class Pantalla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(12, 12, 12)
                         .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(layoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(layoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -758,11 +776,11 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JPanel layoutPanel;
     private javax.swing.JComboBox<String> metodo_combo;
     private javax.swing.JPanel metodo_panel;
     private javax.swing.JLabel reporte_categorias;
