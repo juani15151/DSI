@@ -45,7 +45,7 @@ public class Gestor
         estrategias = new LinkedList<>();
         estrategias.add(new Sumatoria());
         estrategias.add(new PromedioNormalizado());
-        //metodos.add(new MediaConDE());
+        estrategias.add(new MediaConDE());
     }
     
     public void estadisticaConsumo()
