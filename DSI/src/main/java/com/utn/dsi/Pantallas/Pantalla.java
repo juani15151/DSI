@@ -61,6 +61,7 @@ public class Pantalla extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         titulo = new javax.swing.JLabel();
         layoutPanel = new javax.swing.JPanel();
@@ -140,7 +141,7 @@ public class Pantalla extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmarPeriodo.setText("Confirmar");
+        btnConfirmarPeriodo.setText("Siguiente");
         btnConfirmarPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarPeriodoActionPerformed(evt);
@@ -204,7 +205,7 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("No incluidas");
 
-        btnConfirmarZonas.setText("Confirmar");
+        btnConfirmarZonas.setText("Siguiente");
         btnConfirmarZonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarZonasActionPerformed(evt);
@@ -314,7 +315,7 @@ public class Pantalla extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("No incluidas");
 
-        btnConfirmarCategorias.setText("Confirmar");
+        btnConfirmarCategorias.setLabel("Siguiente");
         btnConfirmarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarCategoriasActionPerformed(evt);
@@ -390,7 +391,7 @@ public class Pantalla extends javax.swing.JFrame {
 
         jLabel2.setText("Método Estadístico");
 
-        btnConfirmarMetodo.setText("Confirmar");
+        btnConfirmarMetodo.setText("Siguiente");
         btnConfirmarMetodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarMetodoActionPerformed(evt);
@@ -428,6 +429,7 @@ public class Pantalla extends javax.swing.JFrame {
         layoutPanel.add(metodo_panel);
 
         confirmacion_panel.setMaximumSize(layoutPanel.getMaximumSize());
+        confirmacion_panel.setLayout(new java.awt.GridBagLayout());
 
         confirmar_button.setText("Confirmar");
         confirmar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -435,23 +437,13 @@ public class Pantalla extends javax.swing.JFrame {
                 confirmar_buttonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout confirmacion_panelLayout = new javax.swing.GroupLayout(confirmacion_panel);
-        confirmacion_panel.setLayout(confirmacion_panelLayout);
-        confirmacion_panelLayout.setHorizontalGroup(
-            confirmacion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confirmacion_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(confirmar_button)
-                .addContainerGap())
-        );
-        confirmacion_panelLayout.setVerticalGroup(
-            confirmacion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(confirmacion_panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(confirmar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 96, 73, 123);
+        confirmacion_panel.add(confirmar_button, gridBagConstraints);
 
         layoutPanel.add(confirmacion_panel);
 
