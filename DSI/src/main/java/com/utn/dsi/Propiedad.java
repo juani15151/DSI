@@ -30,14 +30,12 @@ public class Propiedad
         this.servicios = servicios;
     }
     
-    public List buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
+    public Object[] buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {      
         Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
         Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
-        List estadistica_servicio;
+        Object[] estadistica_servicio;
         
-        Double suma;
-        Integer count;
         for(Servicio s : servicios){
             if(s.esDeCategoria(cats) && s.esPeriodoValido(desde, hasta)){
                 // Suma el total de consumo del servicio con el resto
@@ -45,19 +43,16 @@ public class Propiedad
                 estadistica_servicio = s.buscarPromedioNormalizado(desde, hasta);
                 sumatoria_por_categoria.merge(
                         s.getCategoria(), 
-                        (Double) estadistica_servicio.get(0), 
+                        (Double) estadistica_servicio[0], 
                         Double::sum);
                 count_por_categoria.merge(
                         s.getCategoria(),
-                        (Integer) estadistica_servicio.get(1),
+                        (Integer) estadistica_servicio[1],
                         Integer::sum);
             }
         }
         
-        ArrayList estadisticas = new ArrayList(2);
-        estadisticas.add(sumatoria_por_categoria);
-        estadisticas.add(count_por_categoria);        
-        return estadisticas;        
+        return new Object[] {sumatoria_por_categoria, count_por_categoria};        
     }
     
     public Map<Categoria, Double> buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){

@@ -50,7 +50,7 @@ public class Servicio
         return fechaAlta.after(desde) && fechaAlta.before(hasta);
     }
     
-    public List buscarPromedioNormalizado(Date desde, Date hasta)
+    public Object[] buscarPromedioNormalizado(Date desde, Date hasta)
     {
         double suma = 0.0;
         int count = 0;
@@ -60,11 +60,7 @@ public class Servicio
                 count++;
             }
         }
-        List estadistica = new ArrayList(2);
-        estadistica.add(suma);
-        estadistica.add(count);
-        
-        return estadistica;
+        return new Object[] {suma, count};
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){

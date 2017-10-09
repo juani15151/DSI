@@ -38,32 +38,29 @@ public class Zona
     }
     
     
-    public List buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
+    public Object[] buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {
         Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
         Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
         
-        List estadisticas_propiedad;
-        Map<Categoria, Double> sumatoria_propiedad = new HashMap<>();
-        Map<Categoria, Integer> count_propiedad = new HashMap<>();      
+        Object[] estadisticas_propiedad;
+        Map<Categoria, Double> sumatoria_propiedad;
+        Map<Categoria, Integer> count_propiedad;      
         
         for(Propiedad p : propiedades) {
             estadisticas_propiedad = p.buscarPromedioNormalizado(cats, desde, hasta);
-            sumatoria_propiedad = (Map<Categoria, Double>) estadisticas_propiedad.get(0);
-            count_propiedad = (Map<Categoria, Integer>) estadisticas_propiedad.get(1);
+            sumatoria_propiedad = (Map<Categoria, Double>) estadisticas_propiedad[0];
+            count_propiedad = (Map<Categoria, Integer>) estadisticas_propiedad[1];
             // Une la suma y count de la propiedad a los de la zona.
             for(Entry<Categoria, Double> e : sumatoria_propiedad.entrySet()){    
                 sumatoria_por_categoria.merge(e.getKey(), e.getValue(), Double::sum);                
+                count_por_categoria.merge(
+                        e.getKey(), 
+                        count_propiedad.get(e.getKey()),
+                        Integer::sum);
             }
-            for(Entry<Categoria, Integer> e : count_propiedad.entrySet()){    
-                count_por_categoria.merge(e.getKey(), e.getValue(), Integer::sum);
-                
-            }                       
         }
-        ArrayList estadisticas = new ArrayList(2);
-        estadisticas.add(sumatoria_por_categoria);
-        estadisticas.add(count_por_categoria);        
-        return estadisticas;
+        return new Object[] {sumatoria_por_categoria, count_por_categoria};
     }
     
     public Map buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){

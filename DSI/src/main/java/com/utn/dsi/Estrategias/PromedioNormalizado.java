@@ -27,7 +27,7 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
         HashMap<Categoria, Double> sumatoria_por_categorias = new HashMap<>();
         HashMap<Categoria, Integer> count_por_categorias = new HashMap<>();
         
-        List estadistica_from_zona;
+        Object[] estadistica_from_zona;
         Map<Categoria, Double> sumatoria_from_zona;
         Map<Categoria, Integer> count_from_zona;
              
@@ -41,8 +41,8 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
             count_zona = 0;
             
             estadistica_from_zona = zona.buscarPromedioNormalizado(categorias, desde, hasta);
-            sumatoria_from_zona = (Map<Categoria, Double>) estadistica_from_zona.get(0);
-            count_from_zona = (Map<Categoria, Integer>) estadistica_from_zona.get(1);
+            sumatoria_from_zona = (Map<Categoria, Double>) estadistica_from_zona[0];
+            count_from_zona = (Map<Categoria, Integer>) estadistica_from_zona[1];
             
             for(Map.Entry<Categoria, Double> e : sumatoria_from_zona.entrySet()){
                 // Une ambos mapas. Si la clave ya existe, suma sus valores.
