@@ -29,7 +29,7 @@ public class Categoria
     }    
     
     public boolean equals(Categoria c){
-        return this.nombre == c.getNombre();
+        return (c != null && this.nombre.equals(c.getNombre()) );
     }
     
 }

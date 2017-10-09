@@ -108,6 +108,11 @@ public class Persistencia {
     }
     
     private static Date generateRandomDate(Date desde, Date hasta){
+        if(desde.after(hasta)){
+            Date aux = desde;
+            desde = hasta;
+            hasta = desde;
+        }
         
         long MILLIS_PER_DAY = 1000*60*60*24;
         GregorianCalendar s = new GregorianCalendar();

@@ -31,7 +31,8 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
         Double sum_zona;
         Integer count_zona;
         
-        for(Zona zona : zonas){                       
+        for(Zona zona : zonas){  
+            if (zona == null) continue;
             sum_zona = 0.0;
             count_zona = 0;
             

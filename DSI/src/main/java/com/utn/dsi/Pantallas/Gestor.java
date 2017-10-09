@@ -29,9 +29,9 @@ public class Gestor
     private Date hasta;
     private Date fechaActual;
     private List<Categoria> categorias;
-    private List<Categoria> seleccionCategorias;
+    private List<Categoria> seleccionCategorias = new LinkedList<>();
     private List<Zona> zonas;
-    private List<Zona> seleccionZonas;
+    private List<Zona> seleccionZonas = new LinkedList<>();
     private final List<IEstrategiaEstadistica> estrategias;
     private IEstrategiaEstadistica estrategiaSeleccionada;
   
@@ -81,21 +81,15 @@ public class Gestor
     }
     
     public List<Categoria> buscarCategorias()
-    {
-        ArrayList<Categoria> list = new ArrayList<>();
-        // TODO: Buscar categorias.        
-        list.add(new Categoria("test 1"));
-        list.add(new Categoria("test 2"));
-        list.add(new Categoria("test 3"));
-        
-        return list;       
+    {        
+        return Persistencia.getCategorias();       
     }
     
     public void tomarSeleccionCategorias(Object[] categorias)
     {
-        System.out.println("Gestor::tomarSeleccionCategorias() invocado.");
+        seleccionCategorias.clear();
         for(Object categoria : categorias){
-            this.categorias.add((Categoria) categoria);
+            this.seleccionCategorias.add((Categoria) categoria);
         }
         zonas = buscarZonas();
         pantalla.solicitarSeleccionZonas(zonas);
@@ -113,8 +107,9 @@ public class Gestor
     
     public void tomarSeleccionZonas(Object[] zonas)
     {
+        seleccionZonas.clear();
         for(Object zona : zonas){
-            this.zonas.add((Zona) zona);
+            this.seleccionZonas.add((Zona) zona);
         }        
         pantalla.solicitarSeleccionMetodoEstadistico(estrategias);
     }

@@ -619,7 +619,7 @@ public class Pantalla extends javax.swing.JFrame {
     public void tomarSeleccionCategorias() {
         Object[] categorias = new Object[categorias_seleccionadas_model.getSize()];
         categorias_seleccionadas_model.copyInto(categorias);
-        this.categorias_panel.setVisible(false);
+        this.categorias_panel.setVisible(false);        
         g.tomarSeleccionCategorias(categorias);       
     }
 
@@ -635,10 +635,10 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void tomarSeleccionZonas() {
-        Object[] categorias = new Object[zonas_seleccionadas_model.getSize()];
-        zonas_seleccionadas_model.copyInto(categorias);
+        Object[] zonas = new Object[zonas_seleccionadas_model.getSize()];
+        zonas_seleccionadas_model.copyInto(zonas);
         this.zonas_panel.setVisible(false);
-        g.tomarSeleccionZonas(categorias);        
+        g.tomarSeleccionZonas(zonas);        
     }
 
     public void solicitarSeleccionMetodoEstadistico(List metodos) {

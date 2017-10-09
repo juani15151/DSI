@@ -27,7 +27,8 @@ public class Sumatoria implements IEstrategiaEstadistica {
         Map<Categoria, Double> estadisticas_por_categoria;
         Double e_zona = 0.0;
         
-        for(Zona zona : zonas){                       
+        for(Zona zona : zonas){ 
+            if (zona == null) continue; // Nose porque se da este caso.
             e_zona = 0.0;
             estadisticas_por_categoria = zona.buscarSumatoria(categorias, desde, hasta);
             
