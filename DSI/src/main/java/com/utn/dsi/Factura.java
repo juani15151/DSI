@@ -49,7 +49,7 @@ public class Factura implements Comparable<Factura>
         return periodo.incluidoEnPeriodo(desde, hasta);
     }
 
-    public double calcularPromedioNormalizado()
+    public double calcularConsumoNormalizado()
     {
         return (m3consumidos / diasDeLecturaFacturados) * 30 ;
     }

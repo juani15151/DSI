@@ -5,6 +5,7 @@
  */
 package com.utn.dsi;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,33 +30,34 @@ public class Propiedad
         this.servicios = servicios;
     }
     
-    public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
+    public List buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {      
         Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
         Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
+        List estadistica_servicio;
         
         Double suma;
         Integer count;
         for(Servicio s : servicios){
-            // TODO: Que pasa si no tiene ningun servicio valido?
             if(s.esDeCategoria(cats) && s.esPeriodoValido(desde, hasta)){
                 // Suma el total de consumo del servicio con el resto
                 // de la misma categoria.
-                suma = sumatoria_por_categoria.getOrDefault(s.getCategoria(), 0.0);
-                count = count_por_categoria.getOrDefault(s.getCategoria(), 0);
-                suma += s.buscarPromedioNormalizado(desde, hasta);
-                sumatoria_por_categoria.put(s.getCategoria(), suma);
-                count_por_categoria.put(s.getCategoria(), ++count);
+                estadistica_servicio = s.buscarPromedioNormalizado(desde, hasta);
+                sumatoria_por_categoria.merge(
+                        s.getCategoria(), 
+                        (Double) estadistica_servicio.get(0), 
+                        Double::sum);
+                count_por_categoria.merge(
+                        s.getCategoria(),
+                        (Integer) estadistica_servicio.get(1),
+                        Integer::sum);
             }
         }
         
-        for(Entry<Categoria, Double> e : sumatoria_por_categoria.entrySet()){
-            // Divide todas las sumatorias por lo count.
-            e.setValue(e.getValue() / count_por_categoria.get(e.getKey()));
-        }
-        
-        return sumatoria_por_categoria;
-        
+        ArrayList estadisticas = new ArrayList(2);
+        estadisticas.add(sumatoria_por_categoria);
+        estadisticas.add(count_por_categoria);        
+        return estadisticas;        
     }
     
     public Map<Categoria, Double> buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){

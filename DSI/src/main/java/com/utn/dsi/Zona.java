@@ -38,27 +38,32 @@ public class Zona
     }
     
     
-    public Map<Categoria, Double> buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
+    public List buscarPromedioNormalizado(List<Categoria> cats, Date desde, Date hasta)
     {
         Map<Categoria, Double> sumatoria_por_categoria = new HashMap<>();
         Map<Categoria, Integer> count_por_categoria = new HashMap<>();      
         
-        Double suma;
-        Integer count;
+        List estadisticas_propiedad;
+        Map<Categoria, Double> sumatoria_propiedad = new HashMap<>();
+        Map<Categoria, Integer> count_propiedad = new HashMap<>();      
         
         for(Propiedad p : propiedades) {
-            for(Entry<Categoria, Double> e : p.buscarPromedioNormalizado(cats, desde, hasta).entrySet()){    
-                sumatoria_por_categoria.merge(e.getKey(), e.getValue(), Double::sum);
-                count_por_categoria.merge(e.getKey(),1, Integer::sum);
+            estadisticas_propiedad = p.buscarPromedioNormalizado(cats, desde, hasta);
+            sumatoria_propiedad = (Map<Categoria, Double>) estadisticas_propiedad.get(0);
+            count_propiedad = (Map<Categoria, Integer>) estadisticas_propiedad.get(1);
+            // Une la suma y count de la propiedad a los de la zona.
+            for(Entry<Categoria, Double> e : sumatoria_propiedad.entrySet()){    
+                sumatoria_por_categoria.merge(e.getKey(), e.getValue(), Double::sum);                
             }
-            
-            
+            for(Entry<Categoria, Integer> e : count_propiedad.entrySet()){    
+                count_por_categoria.merge(e.getKey(), e.getValue(), Integer::sum);
+                
+            }                       
         }
-        for(Entry<Categoria, Double> e : sumatoria_por_categoria.entrySet()){
-            // Divide todas las sumatorias por lo count.
-            e.setValue(e.getValue() / count_por_categoria.get(e.getKey()));
-        }
-        return sumatoria_por_categoria;
+        ArrayList estadisticas = new ArrayList(2);
+        estadisticas.add(sumatoria_por_categoria);
+        estadisticas.add(count_por_categoria);        
+        return estadisticas;
     }
     
     public Map buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){

@@ -12,9 +12,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
- *
+ * Calcula el promedio de los consumos normalizados de las facturas por zona y categoria.
  * @author Gaston
  */
 public class PromedioNormalizado implements IEstrategiaEstadistica
@@ -26,7 +27,10 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
         HashMap<Categoria, Double> sumatoria_por_categorias = new HashMap<>();
         HashMap<Categoria, Integer> count_por_categorias = new HashMap<>();
         
-        Map<Categoria, Double> estadisticas_por_categoria;
+        List estadistica_from_zona;
+        Map<Categoria, Double> sumatoria_from_zona;
+        Map<Categoria, Integer> count_from_zona;
+             
         
         Double sum_zona;
         Integer count_zona;
@@ -36,12 +40,14 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
             sum_zona = 0.0;
             count_zona = 0;
             
-            estadisticas_por_categoria = zona.buscarPromedioNormalizado(categorias, desde, hasta);
+            estadistica_from_zona = zona.buscarPromedioNormalizado(categorias, desde, hasta);
+            sumatoria_from_zona = (Map<Categoria, Double>) estadistica_from_zona.get(0);
+            count_from_zona = (Map<Categoria, Integer>) estadistica_from_zona.get(1);
             
-            for(Map.Entry<Categoria, Double> e : estadisticas_por_categoria.entrySet()){
+            for(Map.Entry<Categoria, Double> e : sumatoria_from_zona.entrySet()){
                 // Une ambos mapas. Si la clave ya existe, suma sus valores.
                 sumatoria_por_categorias.merge(e.getKey(), e.getValue(), Double::sum);                
-                count_por_categorias.merge(e.getKey(),1, Integer::sum);
+                count_por_categorias.merge(e.getKey(), count_from_zona.get(e.getKey()), Integer::sum);
                 sum_zona += e.getValue();
                 count_zona++;
             }
@@ -50,9 +56,15 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
             
         }
         
+        for(Map.Entry<Categoria, Double> e : sumatoria_por_categorias.entrySet()){
+            Double promedio_categoria = e.getValue() / count_por_categorias.get(e.getValue());
+            e.setValue(promedio_categoria);           
+            // Ahora sumatoria_por_categorias contiene los promedio_por_categoria.
+        }
+        
         List estadisticas = new ArrayList();
         estadisticas.add(estadisticas_zonas);
-        estadisticas.add(sumatoria_por_categorias);        
+        estadisticas.add(sumatoria_por_categorias);       
         return estadisticas;
     }   
     

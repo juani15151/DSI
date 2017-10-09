@@ -5,6 +5,7 @@
  */
 package com.utn.dsi;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -49,19 +50,21 @@ public class Servicio
         return fechaAlta.after(desde) && fechaAlta.before(hasta);
     }
     
-    public Double buscarPromedioNormalizado(Date desde, Date hasta)
+    public List buscarPromedioNormalizado(Date desde, Date hasta)
     {
         double suma = 0.0;
         int count = 0;
         for( Factura factura : facturas){
             if (factura.esLecturaDePeriodo(desde, hasta)){
-                suma += factura.calcularPromedioNormalizado();
+                suma += factura.calcularConsumoNormalizado();
                 count++;
             }
         }
-        // Nota: No estoy seguro que esta lógica funcione
-        // estariamos promediando promedios...
-        return suma / count;
+        List estadistica = new ArrayList(2);
+        estadistica.add(suma);
+        estadistica.add(count);
+        
+        return estadistica;
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){
