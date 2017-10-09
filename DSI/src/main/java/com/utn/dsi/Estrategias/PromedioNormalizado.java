@@ -57,7 +57,7 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
         }
         
         for(Map.Entry<Categoria, Double> e : sumatoria_por_categorias.entrySet()){
-            Double promedio_categoria = e.getValue() / count_por_categorias.get(e.getValue());
+            Double promedio_categoria = e.getValue() / count_por_categorias.get(e.getKey());
             e.setValue(promedio_categoria);           
             // Ahora sumatoria_por_categorias contiene los promedio_por_categoria.
         }
