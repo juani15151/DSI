@@ -612,6 +612,7 @@ public class Pantalla extends javax.swing.JFrame {
         zonas_panel.setVisible(false);
         metodo_panel.setVisible(false);
         confirmacion_panel.setVisible(false);
+        reporte_panel.setVisible(false);
         this.setVisible(true);
     }
 
@@ -695,6 +696,7 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void mostrarReporteZonas(String reporte) {
+        System.out.println("Pantalla::mostrarReporteZonas()");
         this.reporte_zonas.setText(reporte);
         this.reporte_panel.setVisible(true);
     }
