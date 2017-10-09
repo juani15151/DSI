@@ -64,7 +64,6 @@ public class Servicio
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){
-        System.out.println("Servicio::calcularSumatoria();");
         double suma = 0.0;
                 
         for(Factura factura : facturas){

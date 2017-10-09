@@ -56,7 +56,6 @@ public class Propiedad
     }
     
     public Map<Categoria, Double> buscarSumatoria(List<Categoria> cats, Date desde, Date hasta){
-        System.out.println("Propiedad::buscarSumatoria();");
         Map<Categoria, Double> estadistica_por_categoria = new HashMap<>();
         
         Double suma;
