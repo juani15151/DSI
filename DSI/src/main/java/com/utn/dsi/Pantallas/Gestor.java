@@ -35,7 +35,6 @@ public class Gestor
     private List<Categoria> seleccionCategorias = new LinkedList<>();
     private List<Zona> zonas;
     private List<Zona> seleccionZonas = new LinkedList<>();
-    private final List<IEstrategiaEstadistica> estrategias;
     private IEstrategiaEstadistica estrategiaSeleccionada;
   
     
@@ -43,10 +42,6 @@ public class Gestor
     
     Gestor(Pantalla p){
         pantalla = p;
-        estrategias = new LinkedList<>();
-        estrategias.add(new Sumatoria());
-        estrategias.add(new PromedioNormalizado());
-        estrategias.add(new MediaConDE());
     }
     
     public void estadisticaConsumo()
@@ -114,7 +109,15 @@ public class Gestor
         for(Object zona : zonas){
             this.seleccionZonas.add((Zona) zona);
         }        
-        pantalla.solicitarSeleccionMetodoEstadistico(estrategias);
+        pantalla.solicitarSeleccionMetodoEstadistico(this.estrategiasDisponibles());
+    }
+    
+    private List<IEstrategiaEstadistica> estrategiasDisponibles(){
+        List<IEstrategiaEstadistica> estrategias = new LinkedList<>();
+        estrategias.add(new Sumatoria());
+        estrategias.add(new PromedioNormalizado());
+        estrategias.add(new MediaConDE());
+        return estrategias;
     }
     
     public void tomarSeleccionMetodoEstadistico(Object estrategia)
