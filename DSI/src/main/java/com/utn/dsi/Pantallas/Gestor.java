@@ -13,6 +13,7 @@ import com.utn.dsi.Estrategias.Sumatoria;
 import com.utn.dsi.Localidad;
 import com.utn.dsi.Zona;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Date;
 import java.util.LinkedList;
@@ -128,25 +129,38 @@ public class Gestor
         pantalla.solicitarDecisionImpresion();
     }
     
-    public List calcularEstadistica()
+    public Collection<Map> calcularEstadistica()
     {
         return estrategiaSeleccionada.calcularEstadistica(seleccionZonas, 
                 seleccionCategorias, desde, hasta);
     }
     
-    public void generarReporte(List estadisticas)
+    public void generarReporte(Collection<Map> estadisticas)
     {
-        //TODO: Implementar.
+        generarReporteZonas((Map<Zona, Double>) estadisticas.toArray()[0]);
+        generarReporteCategorias((Map<Categoria, Double>) estadisticas.toArray()[1]);
+    }
+    
+    private void generarReporteZonas(Map<Zona, Double> eZonas){
         StringBuilder reporte_zonas = new StringBuilder();
-        Map<Zona, Double> mapa_zonas = (Map<Zona, Double>) estadisticas.get(0);
-        for(Entry<Zona, Double> e : mapa_zonas.entrySet()){
+        for(Entry<Zona, Double> e : eZonas.entrySet()){
             reporte_zonas.append(e.getKey());
             reporte_zonas.append(" -> ");
             reporte_zonas.append(e.getValue());
             reporte_zonas.append("\n");
-        }
-        
+        }        
         pantalla.mostrarReporteZonas(reporte_zonas.toString());
+    }
+    
+    private void generarReporteCategorias(Map<Categoria, Double> eCats){
+        StringBuilder reporte_categorias = new StringBuilder();
+        for(Entry<Categoria, Double> e : eCats.entrySet()){
+            reporte_categorias.append(e.getKey());
+            reporte_categorias.append(" -> ");
+            reporte_categorias.append(e.getValue());
+            reporte_categorias.append("\n");
+        }        
+        pantalla.mostrarReporteCategorias(reporte_categorias.toString());
     }
     
     public void tomarDecisionImpresion(boolean print)
@@ -154,4 +168,11 @@ public class Gestor
         if(print) System.out.println("Imprimiendo reporte...");        
     }
     
+    public static Double[] sumEach(Double[] a, Double[] b){        
+        Double[] c = new Double[a.length];
+        for(int i = 0; i < a.length; i++){
+            c[i] = a[i] + b[i];
+        }
+        return c;
+    }
 }

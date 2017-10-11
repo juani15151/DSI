@@ -705,7 +705,6 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void mostrarReporteZonas(String reporte) {
-        System.out.println("Pantalla::mostrarReporteZonas()");
         this.reporte_zonas.setText(reporte);
         this.reporte_panel.setVisible(true);
     }

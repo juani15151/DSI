@@ -7,8 +7,10 @@ package com.utn.dsi.Estrategias;
 
 import com.utn.dsi.Categoria;
 import com.utn.dsi.Zona;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,7 +19,7 @@ import java.util.List;
 public class MediaConDE implements IEstrategiaEstadistica {
 
     @Override
-    public List calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
+    public Collection<Map> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -8,6 +8,7 @@ package com.utn.dsi.Estrategias;
 import com.utn.dsi.Categoria;
 import com.utn.dsi.Zona;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class Sumatoria implements IEstrategiaEstadistica {
 
     @Override
-    public List calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
+    public Collection<Map> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
         HashMap<Zona, Double> estadisticas_zonas = new HashMap<>();
         HashMap<Categoria, Double> estadisticas_categorias = new HashMap<>();
         
