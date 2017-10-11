@@ -125,6 +125,10 @@ public class Persistencia {
         long endL   =  e.getTimeInMillis() +  e.getTimeZone().getOffset(e.getTimeInMillis());
         long startL = s.getTimeInMillis() + s.getTimeZone().getOffset(s.getTimeInMillis());
         long dayDiff = (endL - startL) / MILLIS_PER_DAY;
+        
+        if(dayDiff < 0){ // Validacion extra para evitar exepciones.
+            dayDiff *= -1;
+        }
        
         Calendar cal = Calendar.getInstance();
         cal.setTime(desde);
