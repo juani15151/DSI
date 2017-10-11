@@ -19,6 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -549,6 +550,7 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarCategoriasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        this.categorias_incluidas_list.setBackground(Color.WHITE);
         move_selected_items(this.categorias_no_list,
                 this.categorias_incluidas_list);
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -568,6 +570,7 @@ public class Pantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarZonasActionPerformed
 
     private void btnAddZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddZonasActionPerformed
+        this.zonas_incluidas_list.setBackground(Color.WHITE);
         move_selected_items(this.zonas_no_list,
                 this.zonas_incluidas_list);
     }//GEN-LAST:event_btnAddZonasActionPerformed
@@ -690,7 +693,13 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void tomarSeleccionCategorias() {
+        if(categorias_seleccionadas_model.isEmpty()){
+            this.categorias_incluidas_list.setBackground(Color.RED);
+            return;
+        }
+        
         Object[] categorias = new Object[categorias_seleccionadas_model.getSize()];
+        
         categorias_seleccionadas_model.copyInto(categorias);
         this.categorias_panel.setVisible(false);        
         g.tomarSeleccionCategorias(categorias);       
@@ -708,6 +717,10 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void tomarSeleccionZonas() {
+        if(zonas_seleccionadas_model.isEmpty()){
+            this.zonas_incluidas_list.setBackground(Color.RED);
+            return;
+        }
         Object[] zonas = new Object[zonas_seleccionadas_model.getSize()];
         zonas_seleccionadas_model.copyInto(zonas);
         this.zonas_panel.setVisible(false);
