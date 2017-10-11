@@ -129,13 +129,13 @@ public class Gestor
         pantalla.solicitarDecisionImpresion();
     }
     
-    public Collection<Map<Object, Double[]>> calcularEstadistica()
+    public Collection<Map<Object, Double>> calcularEstadistica()
     {
         return estrategiaSeleccionada.calcularEstadistica(seleccionZonas, 
                 seleccionCategorias, desde, hasta);
     }
     
-    public void generarReporte(Collection<Map<Object, Double[]>> estadisticas)
+    public void generarReporte(Collection<Map<Object, Double>> estadisticas)
     {
         generarReporteZonas((Map<Zona, Double>) estadisticas.toArray()[0]);
         generarReporteCategorias((Map<Categoria, Double>) estadisticas.toArray()[1]);

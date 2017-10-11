@@ -24,7 +24,7 @@ public class PromedioNormalizado implements IEstrategiaEstadistica
 {
 
     @Override
-    public Collection<Map<Object, Double[]>> calcularEstadistica(List<Zona> zonas, List<Categoria> cats, Date desde, Date hasta) {
+    public Collection<Map<Object, Double>> calcularEstadistica(List<Zona> zonas, List<Categoria> cats, Date desde, Date hasta) {
         Map<Zona, Double> estadisticas_zonas = new HashMap<>();
         Map<Categoria, Double[]> valores_por_categoria = new HashMap<>();
         Map<Categoria, Double> estadisticas_por_categoria = new HashMap<>();

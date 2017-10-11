@@ -19,7 +19,7 @@ import java.util.Map;
 public class MediaConDE implements IEstrategiaEstadistica {
 
     @Override
-    public Collection<Map<Object, Double[]>> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
+    public Collection<Map<Object, Double>> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
