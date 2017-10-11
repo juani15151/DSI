@@ -5,6 +5,7 @@
  */
 package com.utn.dsi;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,8 +23,7 @@ public class Localidad
     }  
 
     public List<Zona> getZonas() {
-        // TODO: Devolver una copia.
-        return zonas;
+        return new LinkedList<>(zonas);
     }
 
     
