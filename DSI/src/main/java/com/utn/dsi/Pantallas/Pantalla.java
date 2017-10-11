@@ -788,7 +788,14 @@ public class Pantalla extends javax.swing.JFrame {
     public void tomarDecisionImpresion(boolean print) {
         g.tomarDecisionImpresion(print);
     }
-
+    
+    public void mostrarError(String message, String title) {
+        JOptionPane.showConfirmDialog(this, 
+                message, 
+                title, 
+                JOptionPane.CLOSED_OPTION);
+    }
+    
     private class DateVerifier extends InputVerifier {
 
         @Override

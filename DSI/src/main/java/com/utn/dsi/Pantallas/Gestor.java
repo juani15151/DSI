@@ -58,6 +58,7 @@ public class Gestor
             this.hasta = hasta;                         
             pantalla.solicitarSeleccionCategorias(this.buscarCategorias());            
         } else {
+            pantalla.mostrarError("Error al ingresar las fechas", "Datos Inválidos");
             pantalla.solicitarPeriodo();
         }
             
@@ -145,8 +146,8 @@ public class Gestor
     public void cancelar(){
         desde = null;
         hasta = null;
-        seleccionCategorias = null;
-        seleccionZonas = null;
+        seleccionCategorias.clear();
+        seleccionZonas.clear();
         pantalla.habilitarVentana();
         this.estadisticaConsumo();
     }
