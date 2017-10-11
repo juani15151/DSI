@@ -105,7 +105,7 @@ public class Pantalla extends javax.swing.JFrame {
         reporte_zonas = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         reporte_categorias = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estadística de Consumos");
@@ -511,10 +511,10 @@ public class Pantalla extends javax.swing.JFrame {
 
         layoutPanel.add(reporte_panel);
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
 
@@ -531,7 +531,7 @@ public class Pantalla extends javax.swing.JFrame {
                             .addComponent(layoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jButton1)))
+                        .addComponent(cancelarButton)))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -542,7 +542,7 @@ public class Pantalla extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(layoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1)
+                .addComponent(cancelarButton)
                 .addGap(12, 12, 12))
         );
 
@@ -606,9 +606,9 @@ public class Pantalla extends javax.swing.JFrame {
         this.fecha_hasta_field.selectAll();
     }//GEN-LAST:event_fecha_hasta_fieldFocusGained
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         g.cancelar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void move_selected_items(JList from, JList into) {
         int[] indexes = from.getSelectedIndices();
@@ -816,6 +816,7 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmarZonas;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarZonas;
+    private javax.swing.JButton cancelarButton;
     private javax.swing.JList<String> categorias_incluidas_list;
     private javax.swing.JList<String> categorias_no_list;
     private javax.swing.JPanel categorias_panel;
@@ -824,7 +825,6 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField fecha_desde_field;
     private javax.swing.JFormattedTextField fecha_hasta_field;
     private javax.swing.JPanel fecha_panel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
