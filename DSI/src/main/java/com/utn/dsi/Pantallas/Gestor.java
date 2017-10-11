@@ -142,6 +142,15 @@ public class Gestor
         generarReporteCategorias((Map<Categoria, Double>) estadisticas.toArray()[1]);
     }
     
+    public void cancelar(){
+        desde = null;
+        hasta = null;
+        seleccionCategorias = null;
+        seleccionZonas = null;
+        pantalla.habilitarVentana();
+        this.estadisticaConsumo();
+    }
+    
     private void generarReporteZonas(Map<Zona, Double> eZonas){
         StringBuilder reporte_zonas = new StringBuilder();
         for(Entry<Zona, Double> e : eZonas.entrySet()){
