@@ -6,6 +6,8 @@
 package com.utn.dsi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -50,17 +52,17 @@ public class Servicio
         return fechaAlta.after(desde) && fechaAlta.before(hasta);
     }
     
-    public Object[] buscarPromedioNormalizado(Date desde, Date hasta)
+    public Double[] buscarPromedioNormalizado(Date desde, Date hasta)
     {
-        double suma = 0.0;
-        int count = 0;
+        Double[] estadistica = new Double[]{0.0, 0.0};
+
         for( Factura factura : facturas){
             if (factura.esLecturaDePeriodo(desde, hasta)){
-                suma += factura.calcularConsumoNormalizado();
-                count++;
+                estadistica[0] += factura.calcularConsumoNormalizado(); //suma
+                estadistica[1]++; //count
             }
         }
-        return new Object[] {suma, count};
+        return estadistica;
     }
     
     public Double calcularSumatoria(Date desde, Date hasta){
