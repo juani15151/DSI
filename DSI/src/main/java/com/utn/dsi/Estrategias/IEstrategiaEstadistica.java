@@ -21,5 +21,5 @@ import java.util.Map;
 public interface IEstrategiaEstadistica 
 {
     // La lista debe contener 2 mapas, uno con zonas y otro con categorias.
-    Collection<Map> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta);
+    Collection<Map<Object, Double[]>> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta);
 }

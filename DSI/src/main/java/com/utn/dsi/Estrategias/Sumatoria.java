@@ -21,7 +21,7 @@ import java.util.Map;
 public class Sumatoria implements IEstrategiaEstadistica {
 
     @Override
-    public Collection<Map> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
+    public Collection<Map<Object, Double[]>> calcularEstadistica(List<Zona> zonas, List<Categoria> categorias, Date desde, Date hasta) {
         HashMap<Zona, Double> estadisticas_zonas = new HashMap<>();
         HashMap<Categoria, Double> estadisticas_categorias = new HashMap<>();
         
