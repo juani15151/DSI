@@ -52,18 +52,13 @@ public class Gestor
     public void tomarPeriodo(Date desde, Date hasta)
     {
         fechaActual = obtenerFechaActual();
-        //System.out.println(desde.toString() + " - " + hasta.toString());
+
         if (validarPeriodo(desde, hasta)){
             this.desde = desde;
-            this.hasta = hasta; 
-            
-            
-            categorias = buscarCategorias();
-            
-            pantalla.solicitarSeleccionCategorias(categorias);
-            
+            this.hasta = hasta;                         
+            pantalla.solicitarSeleccionCategorias(this.buscarCategorias());            
         } else {
-           // TODO: Como manejar este caso? 
+            pantalla.solicitarPeriodo();
         }
             
     }
@@ -73,14 +68,17 @@ public class Gestor
         return new Date(); // Por defecto es la fecha actual. Verificar.
     }
     
-    public boolean validarPeriodo(Date desde, Date hasta)
+    private boolean validarPeriodo(Date desde, Date hasta)
     {
-        return desde.before(hasta) && desde.before(fechaActual);
+        return desde.before(hasta) && hasta.before(fechaActual);
     }
     
-    public List<Categoria> buscarCategorias()
+    private List<Categoria> buscarCategorias()
     {        
-        return Persistencia.getCategorias();       
+        if (categorias == null){
+            categorias = Persistencia.getCategorias();       
+        }
+        return categorias;
     }
     
     public void tomarSeleccionCategorias(Object[] categorias)

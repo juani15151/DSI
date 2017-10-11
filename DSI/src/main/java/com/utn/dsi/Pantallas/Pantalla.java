@@ -657,6 +657,8 @@ public class Pantalla extends javax.swing.JFrame {
     }
 
     public void solicitarPeriodo() {
+        fecha_desde_field.setText("Desde (dd/mm/aaaa)");
+        fecha_hasta_field.setText("Hasta (dd/mm/aaaa)");
         this.fecha_panel.setVisible(true);
     }
 
